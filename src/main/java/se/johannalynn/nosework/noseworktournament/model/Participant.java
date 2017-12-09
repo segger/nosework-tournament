@@ -1,4 +1,4 @@
-package se.johannalynn.nosework.noseworktournament.domain;
+package se.johannalynn.nosework.noseworktournament.model;
 
 import javax.persistence.*;
 

@@ -5,15 +5,25 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Participants</h1>
-<p th:each="participant : ${participants}">
-<h4>ID:</h4>
-<div th:text="${participant.id}"></div>
-<h4>Owner:</h4>
-<div th:text="${participant.owner}"></div>
-<h4>Dog</h4>
-<div th:text="${participant.dog}"></div>
-<div>---------------------------------------------------------</div>
-</p>
+<h4>Participants</h4>
+<table>
+    <thead><th>Förare</th><th>Hund</th><th></th></thead>
+    <tbody>
+        <tr th:each="participant : ${participants}">
+            <td><span th:text="${participant.owner}" /></td>
+            <td><span th:text="${participant.dog}" /></td>
+            <td><a th:href="@{'/edit/' + ${participant.id}}">Edit</a></td>
+            <td><a th:href="@{'/delete/' + ${participant.id}}">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/saveOrUpdate}" th:object="${participant}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <p>Förare: <input type="text" th:field="*{owner}" /></p>
+    <p>Hund: <input type="text" th:field="*{dog}" /></p>
+    <p><input type="submit" value="Lägg till" /> <input type="reset" value="Rensa" /></p>
+</form>
+
 </body>
 </html>

@@ -6,3 +6,5 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  thymeleaf:
+    cache: false
