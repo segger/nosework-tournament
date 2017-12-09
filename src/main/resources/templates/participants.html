@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Participants</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Participants</h1>
+<p th:each="participant : ${participants}">
+<h4>ID:</h4>
+<div th:text="${participant.id}"></div>
+<h4>Owner:</h4>
+<div th:text="${participant.owner}"></div>
+<h4>Dog</h4>
+<div th:text="${participant.dog}"></div>
+<div>---------------------------------------------------------</div>
+</p>
+</body>
+</html>

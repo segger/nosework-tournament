@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: segger
+      changes:
+        - createTable:
+            tableName: participant
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: owner
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: dog
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: segger
+      changes:
+        - insert:
+            tableName: participant
+            columns:
+              - column:
+                  name: owner
+                  value: Johanna
+              - column:
+                  name: dog
+                  value: Kira
