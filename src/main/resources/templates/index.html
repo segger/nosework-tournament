@@ -6,9 +6,11 @@
 </head>
 <body>
 
+<div th:replace="fragments/header :: header">&nbsp;</div>
+
 <h4>Noseworktunering</h4>
 <ul>
-    <li><a href="/participants">Participants</a></li>
+    <li><a href="/participants">Deltagare</a></li>
 </ul>
 
 <div>
@@ -16,6 +18,10 @@
         <div><input type="file" name="file" /></div>
         <div><input type="submit" value="Importera" /></div>
     </form>
+</div>
+
+<div th:if="${importMessage}">
+    <h2 th:text="${importMessage}"/>
 </div>
 
 <div>

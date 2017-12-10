@@ -1,10 +1,14 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
   h2:
     console:
       enabled: true
       path: /h2-console
   thymeleaf:
     cache: false
+  http:
+    multipart:
+      max-file-size: 128KB
+      max-request-size: 128KB
