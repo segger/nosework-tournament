@@ -13,8 +13,11 @@ public class Tournament {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "id")
-    private List<Contest> contests;
+    //@OneToMany(mappedBy = "id")
+    //private List<Contest> contests;
+
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
+    private List<Participant> participants;
 
     public Tournament() {
     }
@@ -34,12 +37,20 @@ public class Tournament {
     public void setId(Long id) {
         this.id = id;
     }
-
+/*
     public List<Contest> getContests() {
         return contests;
     }
 
     public void setContests(List<Contest> contests) {
         this.contests = contests;
+    }
+*/
+    public List<Participant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
     }
 }

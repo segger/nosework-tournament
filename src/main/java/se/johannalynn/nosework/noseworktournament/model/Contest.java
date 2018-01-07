@@ -1,6 +1,7 @@
 package se.johannalynn.nosework.noseworktournament.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Contest {
@@ -11,6 +12,13 @@ public class Contest {
 
     @Column
     private String name;
+
+    //@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    //private List<Event> events;
+
+    //@ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "tournamentId")
+    //private Tournament tournament;
 
     public Contest() {
     }

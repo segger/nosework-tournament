@@ -1,6 +1,7 @@
 package se.johannalynn.nosework.noseworktournament.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Participant {
@@ -14,6 +15,10 @@ public class Participant {
 
     @Column
     private String dog;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tournamentId")
+    private Tournament tournament;
 
     public Participant() {
     }
@@ -40,5 +45,13 @@ public class Participant {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Tournament getTournament() {
+        return tournament;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
     }
 }

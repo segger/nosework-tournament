@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import se.johannalynn.nosework.noseworktournament.domain.ParticipantRepository;
 import se.johannalynn.nosework.noseworktournament.domain.TournamentRepository;
+import se.johannalynn.nosework.noseworktournament.model.Participant;
 import se.johannalynn.nosework.noseworktournament.model.Tournament;
 
 import java.io.IOException;
@@ -17,7 +19,7 @@ public class FileService {
     private ObjectMapper mapper;
 
     @Autowired
-    TournamentRepository repository;
+    TournamentRepository tournamentRepository;
 
     public Tournament loadTournament(MultipartFile file) {
         //TODO: check json, encoding, etc
@@ -26,8 +28,7 @@ public class FileService {
         try {
             content = new String(file.getBytes());
             Tournament tournament = mapper.readValue(content, Tournament.class);
-
-            repository.save(tournament);
+            tournamentRepository.save(tournament);
 
             return tournament;
         } catch (IOException e) {
@@ -37,7 +38,7 @@ public class FileService {
     }
 
     public byte[] exportTournament(String name) throws FileServiceException {
-        Tournament tournament = repository.findByName(name);
+        Tournament tournament = tournamentRepository.findByName(name);
 
         try {
             byte[] buf = mapper.writeValueAsBytes(tournament);
