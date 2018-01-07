@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nosework Tournament</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">&nbsp;</div>
+
+<h4>Noseworktunering</h4>
+<h3 th:text="${tournament.name}" />
+
+<ul>
+    <li><a href="/participants">Deltagare</a></li>
+</ul>
+
+<div>
+    <a th:href="@{'/tournament/export/' + ${tournament.name}}">Exportera tuneringsfil</a>
+</div>
+
+</body>
+</html>

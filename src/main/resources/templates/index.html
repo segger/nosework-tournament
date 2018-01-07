@@ -6,13 +6,9 @@
 </head>
 <body>
 
-<div th:replace="fragments/header :: header">&nbsp;</div>
-
 <h4>Noseworktunering</h4>
-<ul>
-    <li><a href="/participants">Deltagare</a></li>
-</ul>
 
+<h6>Importera tunering</h6>
 <div>
     <form action="#" th:action="@{/import}" th:object="${file}" method="post" enctype="multipart/form-data">
         <div><input type="file" name="file" /></div>
@@ -24,9 +20,16 @@
     <h2 th:text="${importMessage}"/>
 </div>
 
-<div>
-    <a href="/export">Exportera tuneringsfil</a>
-</div>
+<h6>Skapa tunering</h6>
+<form action="#" th:action="@{/tournament}" th:object="${tournament}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <p>Namn: <input type="text" th:field="*{name}" /></p>
+    <p><input type="submit" value="Lägg till" /> <input type="reset" value="Rensa" /></p>
+</form>
+
+<ul>
+    <li th:if="${tournament.id != null}"><a th:href="@{'/tournament/' + ${tournament.id}}"><span th:text="${tournament.name}"/></a></li>
+</ul>
 
 </body>
 </html>
