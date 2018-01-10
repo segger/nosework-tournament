@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Ekipage</title>
+    <title>Noseworktunering</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -15,12 +15,13 @@
         <tr th:each="participant : ${participants}">
             <td><span th:text="${participant.owner}" /></td>
             <td><span th:text="${participant.dog}" /></td>
-            <td><a th:href="@{'/participants/edit/' + ${participant.id}}">Edit</a></td>
-            <td><a th:href="@{'/participants/delete/' + ${participant.id}}">Delete</a></td>
+            <td><a th:href="@{'/participants/edit/' + ${participant.id}}">Ändra</a></td>
+            <td><a th:href="@{'/participants/delete/' + ${participant.id}}">Ta bort</a></td>
         </tr>
     </tbody>
 </table>
 
+<h6>Lägg till ekipage</h6>
 <form action="#" th:action="@{/participants/saveOrUpdate}" th:object="${participant}" method="post">
     <input type="hidden" th:field="*{id}" />
     <p>Förare: <input type="text" th:field="*{owner}" /></p>

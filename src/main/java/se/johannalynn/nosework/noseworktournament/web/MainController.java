@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import se.johannalynn.nosework.noseworktournament.domain.TournamentRepository;
-import se.johannalynn.nosework.noseworktournament.model.Tournament;
+import se.johannalynn.nosework.noseworktournament.entity.Tournament;
 import se.johannalynn.nosework.noseworktournament.service.FileService;
 
 @Controller

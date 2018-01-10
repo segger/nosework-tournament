@@ -5,10 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import se.johannalynn.nosework.noseworktournament.domain.ParticipantRepository;
 import se.johannalynn.nosework.noseworktournament.domain.TournamentRepository;
-import se.johannalynn.nosework.noseworktournament.model.Participant;
-import se.johannalynn.nosework.noseworktournament.model.Tournament;
+import se.johannalynn.nosework.noseworktournament.entity.Tournament;
 
 import java.io.IOException;
 
@@ -44,6 +42,7 @@ public class FileService {
             byte[] buf = mapper.writeValueAsBytes(tournament);
             return buf;
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             throw new FileServiceException();
         }
     }

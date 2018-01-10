@@ -10,7 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import se.johannalynn.nosework.noseworktournament.domain.ParticipantRepository;
-import se.johannalynn.nosework.noseworktournament.model.Participant;
+import se.johannalynn.nosework.noseworktournament.entity.Participant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,6 @@ public class ParticipantControllerTest {
 
             this.mvc.perform(get("/participants")).andExpect(status().isOk())
                     .andExpect(model().attribute("participants", Matchers.notNullValue()));
-                    //.andExpect(model().attribute("participants", Matchers.isNotNull()));
+                    //.andExpect(entity().attribute("participants", Matchers.isNotNull()));
         }
 }

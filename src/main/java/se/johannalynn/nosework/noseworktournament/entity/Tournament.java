@@ -1,4 +1,6 @@
-package se.johannalynn.nosework.noseworktournament.model;
+package se.johannalynn.nosework.noseworktournament.entity;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,9 +15,11 @@ public class Tournament {
     @Column
     private String name;
 
-    //@OneToMany(mappedBy = "id")
-    //private List<Contest> contests;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
+    private List<Contest> contests;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
     private List<Participant> participants;
 
@@ -37,20 +41,20 @@ public class Tournament {
     public void setId(Long id) {
         this.id = id;
     }
-/*
-    public List<Contest> getContests() {
-        return contests;
-    }
 
-    public void setContests(List<Contest> contests) {
-        this.contests = contests;
-    }
-*/
     public List<Participant> getParticipants() {
         return participants;
     }
 
     public void setParticipants(List<Participant> participants) {
         this.participants = participants;
+    }
+
+    public List<Contest> getContests() {
+        return contests;
+    }
+
+    public void setContests(List<Contest> contests) {
+        this.contests = contests;
     }
 }

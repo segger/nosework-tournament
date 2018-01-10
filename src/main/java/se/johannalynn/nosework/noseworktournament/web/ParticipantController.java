@@ -5,7 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.johannalynn.nosework.noseworktournament.domain.ParticipantRepository;
-import se.johannalynn.nosework.noseworktournament.model.Participant;
+import se.johannalynn.nosework.noseworktournament.entity.Participant;
+import se.johannalynn.nosework.noseworktournament.service.TournamentService;
 
 @Controller
 @RequestMapping("/participants")
@@ -13,6 +14,9 @@ public class ParticipantController {
 
     @Autowired
     ParticipantRepository participantRepository;
+
+    @Autowired
+    TournamentService tournamentService;
 
     @GetMapping(value = {"","/*"})
     public String showParticipants(Model model) {
@@ -23,7 +27,7 @@ public class ParticipantController {
 
     @PostMapping("saveOrUpdate")
     public String saveOrUpdate(@ModelAttribute Participant participant) {
-        participantRepository.save(participant);
+        tournamentService.saveParticipant(participant);
         return "redirect:/participants";
     }
 

@@ -1,4 +1,4 @@
-package se.johannalynn.nosework.noseworktournament.model;
+package se.johannalynn.nosework.noseworktournament.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
