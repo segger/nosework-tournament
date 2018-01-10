@@ -1,7 +1,10 @@
 package se.johannalynn.nosework.noseworktournament.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Time;
 
 @Entity
 public class Event {
@@ -22,14 +25,15 @@ public class Event {
     private Level level;
 
     @Column
-    private Date maxTime;
+    private Time maxTime;
 
-    //points
+    //private points
     //results
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "contestId")
-    //private Contest contests;
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contest_id")
+    private Contest contest;
 
     public Event() {
     }
@@ -66,11 +70,24 @@ public class Event {
         this.level = level;
     }
 
-    public Date getMaxTime() {
+    public Time getMaxTime() {
         return maxTime;
     }
 
-    public void setMaxTime(Date maxTime) {
+    public void setMaxTime(Time maxTime) {
         this.maxTime = maxTime;
+    }
+
+    public Contest getContest() {
+        return contest;
+    }
+
+    public void setContest(Contest contest) {
+        this.contest = contest;
+    }
+
+    @Override
+    public String toString() {
+        return "Event[id=" + id + ", name=" + name + ", type=" + type + ", level=" + level + ", maxTime=" + maxTime + "]";
     }
 }

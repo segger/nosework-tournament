@@ -13,7 +13,7 @@
     <thead><th>Namn</th><th>Datum</th><th></th></thead>
     <tbody>
         <tr th:each="contest : ${contests}">
-            <td><span th:text="${contest.name}" /></td>
+            <td><a th:href="@{/events(contest=${contest.id})}"><span th:text="${contest.name}" /></a></td>
             <td><span th:text="${contest.date}" /></td>
             <td><a th:href="@{'/contests/edit/' + ${contest.id}}">Ändra</a></td>
             <td><a th:href="@{'/contests/delete/' + ${contest.id}}">Ta bort</a></td>

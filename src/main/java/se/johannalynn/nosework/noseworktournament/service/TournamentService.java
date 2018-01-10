@@ -3,9 +3,11 @@ package se.johannalynn.nosework.noseworktournament.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.johannalynn.nosework.noseworktournament.domain.ContestRepository;
+import se.johannalynn.nosework.noseworktournament.domain.EventRepository;
 import se.johannalynn.nosework.noseworktournament.domain.ParticipantRepository;
 import se.johannalynn.nosework.noseworktournament.domain.TournamentRepository;
 import se.johannalynn.nosework.noseworktournament.entity.Contest;
+import se.johannalynn.nosework.noseworktournament.entity.Event;
 import se.johannalynn.nosework.noseworktournament.entity.Participant;
 import se.johannalynn.nosework.noseworktournament.entity.Tournament;
 
@@ -17,6 +19,9 @@ public class TournamentService {
 
     @Autowired
     ContestRepository contestRepository;
+
+    @Autowired
+    EventRepository eventRepository;
 
     @Autowired
     TournamentRepository tournamentRepository;
@@ -36,5 +41,11 @@ public class TournamentService {
     public void saveContest(Contest contest) {
         contest.setTournament(getTournament());
         contestRepository.save(contest);
+    }
+
+    public void saveEvent(Long contestId, Event event) {
+        Contest contest = contestRepository.findOne(contestId);
+        event.setContest(contest);
+        eventRepository.save(event);
     }
 }
