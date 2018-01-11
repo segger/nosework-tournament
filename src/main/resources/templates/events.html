@@ -10,12 +10,11 @@
 
 <h4>Sök</h4>
 <table>
-    <thead><th>Namn</th><th>Typ</th><th>Level</th><th>Maxtid</th><th></th></thead>
+    <thead><th>Namn</th><th>Typ</th><th>Maxtid</th><th></th></thead>
     <tbody>
         <tr th:each="event : ${events}">
             <td><span th:text="${event.name}" /></td>
             <td><span th:text="${event.type}" /></td>
-            <td><span th:text="${event.level}" /></td>
             <td><span th:text="${event.maxTime}" /></td>
             <td><a th:href="@{'/events/edit/' + ${event.id}(contest=${contest})}">Ändra</a></td>
             <td><a th:href="@{'/events/delete/' + ${event.id}(contest=${contest})}">Ta bort</a></td>
@@ -28,9 +27,8 @@
     <input type="hidden" th:field="*{id}" />
     <p>Namn: <input type="text" th:field="*{name}" /></p>
     <p>Typ: <input type="text" th:field="*{type}" /></p>
-    <p>Level: <input type="text" th:field="*{level}" /></p>
     <p>Maxtid: <input type="text" th:field="*{maxTime}" /></p>
-    <p><input type="submit" value="Lägg till" /> <input type="reset" value="Rensa" /></p>
+    <p><input type="submit" value="Lägg till" /></p>
 </form>
 
 </body>

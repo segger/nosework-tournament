@@ -26,20 +26,23 @@ public class TournamentService {
     @Autowired
     TournamentRepository tournamentRepository;
 
-    private Tournament getTournament() {
-        for(Tournament tournament : tournamentRepository.findAll()) {
-            return tournament;
-        }
-        return null;
+    public Tournament getTournamentById(Long tournamentId) {
+        return tournamentRepository.findOne(tournamentId);
     }
 
-    public void saveParticipant(Participant participant) {
-        participant.setTournament(getTournament());
+    public Tournament getTournamentByContestId(Long contestId) {
+        return contestRepository.findOne(contestId).getTournament();
+    }
+
+    public void saveParticipant(Long tournamentId, Participant participant) {
+        Tournament tournament = tournamentRepository.findOne(tournamentId);
+        participant.setTournament(tournament);
         participantRepository.save(participant);
     }
 
-    public void saveContest(Contest contest) {
-        contest.setTournament(getTournament());
+    public void saveContest(Long tournamentId, Contest contest) {
+        Tournament tournament = tournamentRepository.findOne(tournamentId);
+        contest.setTournament(tournament);
         contestRepository.save(contest);
     }
 

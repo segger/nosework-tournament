@@ -15,18 +15,18 @@
         <tr th:each="contest : ${contests}">
             <td><a th:href="@{/events(contest=${contest.id})}"><span th:text="${contest.name}" /></a></td>
             <td><span th:text="${contest.date}" /></td>
-            <td><a th:href="@{'/contests/edit/' + ${contest.id}}">Ändra</a></td>
-            <td><a th:href="@{'/contests/delete/' + ${contest.id}}">Ta bort</a></td>
+            <td><a th:href="@{'/contests/edit/' + ${contest.id}(tournament=${tournament.id})}">Ändra</a></td>
+            <td><a th:href="@{'/contests/delete/' + ${contest.id}(tournament=${tournament.id})}">Ta bort</a></td>
         </tr>
     </tbody>
 </table>
 
 <h6>Lägg till deltävling</h6>
-<form action="#" th:action="@{/contests/saveOrUpdate}" th:object="${contest}" method="post">
+<form action="#" th:action="@{/contests/saveOrUpdate(tournament=${tournament.id})}" th:object="${contest}" method="post">
     <input type="hidden" th:field="*{id}" />
     <p>Namn: <input type="text" th:field="*{name}" /></p>
     <p>Datum: <input type="text" th:field="*{date}" /></p>
-    <p><input type="submit" value="Lägg till" /> <input type="reset" value="Rensa" /></p>
+    <p><input type="submit" value="Lägg till" /></p>
 </form>
 
 </body>

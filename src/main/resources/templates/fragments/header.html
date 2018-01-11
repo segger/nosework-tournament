@@ -8,8 +8,9 @@
 <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
     <div class="container">
         <div class="navbar-header">
-            Noseworktunering
-            <a href="/tournament">Tunering</a>
+            <h4>Noseworktunering</h4>
+            <a href="/">Startsida</a>
+            <a th:href="@{'/tournament/' + ${tournament.id}}"><span th:text="${tournament.name}" /></a>
         </div>
     </div>
 </div>

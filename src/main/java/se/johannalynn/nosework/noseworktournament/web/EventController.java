@@ -8,6 +8,7 @@ import se.johannalynn.nosework.noseworktournament.domain.ContestRepository;
 import se.johannalynn.nosework.noseworktournament.domain.EventRepository;
 import se.johannalynn.nosework.noseworktournament.entity.Contest;
 import se.johannalynn.nosework.noseworktournament.entity.Event;
+import se.johannalynn.nosework.noseworktournament.entity.Tournament;
 import se.johannalynn.nosework.noseworktournament.service.TournamentService;
 
 @Controller
@@ -21,7 +22,9 @@ public class EventController {
     TournamentService tournamentService;
 
     @GetMapping(value = {"","/*"})
-    public String showParticipants(@RequestParam("contest") Long contestId, Model model) {
+    public String getEvents(@RequestParam("contest") Long contestId, Model model) {
+        Tournament tournament = tournamentService.getTournamentByContestId(contestId);
+        model.addAttribute("tournament", tournament);
         model.addAttribute("contest", contestId);
         model.addAttribute("events", eventRepository.findByContestId(contestId));
         model.addAttribute("event", new Event());
@@ -42,6 +45,8 @@ public class EventController {
 
     @GetMapping("edit/{id}")
     public String editParticipant(@PathVariable Long id, @RequestParam("contest") Long contestId, Model model) {
+        Tournament tournament = tournamentService.getTournamentByContestId(contestId);
+        model.addAttribute("tournament", tournament);
         model.addAttribute("contest", contestId);
         model.addAttribute("events", eventRepository.findByContestId(contestId));
         Event event = eventRepository.findOne(id);

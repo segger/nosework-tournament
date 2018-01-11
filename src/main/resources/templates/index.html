@@ -24,11 +24,16 @@
 <form action="#" th:action="@{/tournament}" th:object="${tournament}" method="post">
     <input type="hidden" th:field="*{id}" />
     <p>Namn: <input type="text" th:field="*{name}" /></p>
-    <p><input type="submit" value="Lägg till" /> <input type="reset" value="Rensa" /></p>
+    <p>Level: <input type="text" th:field="*{level}" /></p>
+    <p><input type="submit" value="Lägg till" /></p>
 </form>
 
 <ul>
-    <li th:if="${tournament.id != null}"><a th:href="@{'/tournament/' + ${tournament.id}}"><span th:text="${tournament.name}"/></a></li>
+    <li th:each="tournament : ${tournaments}">
+        <a th:href="@{'/tournament/' + ${tournament.id}}"><span th:text="${tournament.name}" /></a>
+        | <span th:text="${tournament.level}" /> |
+        <a th:href="@{'/tournament/delete/' + ${tournament.id}}">Ta bort</a>
+    </li>
 </ul>
 
 </body>

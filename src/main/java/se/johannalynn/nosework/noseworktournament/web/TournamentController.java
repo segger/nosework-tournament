@@ -24,21 +24,19 @@ public class TournamentController {
     FileService fileService;
 
     @Autowired
-    TournamentRepository repository;
-
-    @GetMapping(value = {"", "/*"})
-    public String get(Model model) {
-        for(Tournament tournament : repository.findAll()) {
-            model.addAttribute("tournament", tournament);
-        }
-        return "tournament";
-    }
+    TournamentRepository tournamentRepository;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getTournament(@PathVariable("id") String id, Model model) {
-        Tournament tournament = repository.findOne(Long.valueOf(id));
+        Tournament tournament = tournamentRepository.findOne(Long.valueOf(id));
         model.addAttribute("tournament", tournament);
         return "tournament";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteTournament(@PathVariable Long id) {
+        tournamentRepository.delete(id);
+        return "redirect:/index";
     }
 
     @GetMapping(value = "/export/{name}", produces = MediaType.APPLICATION_JSON_VALUE)

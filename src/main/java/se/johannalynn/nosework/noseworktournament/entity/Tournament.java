@@ -15,6 +15,10 @@ public class Tournament {
     @Column
     private String name;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Level level;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
     private List<Contest> contests;
@@ -56,5 +60,13 @@ public class Tournament {
 
     public void setContests(List<Contest> contests) {
         this.contests = contests;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
     }
 }

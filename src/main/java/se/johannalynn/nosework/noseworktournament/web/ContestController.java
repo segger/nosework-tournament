@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.johannalynn.nosework.noseworktournament.domain.ContestRepository;
 import se.johannalynn.nosework.noseworktournament.entity.Contest;
+import se.johannalynn.nosework.noseworktournament.entity.Tournament;
 import se.johannalynn.nosework.noseworktournament.service.TournamentService;
 
 @Controller
@@ -19,26 +20,30 @@ public class ContestController {
     TournamentService tournamentService;
 
     @GetMapping(value = {"","/*"})
-    public String showParticipants(Model model) {
+    public String getParticipants(@RequestParam("tournament") Long tournamentId, Model model) {
+        Tournament tournament = tournamentService.getTournamentById(tournamentId);
+        model.addAttribute("tournament", tournament);
         model.addAttribute("contests", contestRepository.findAll());
         model.addAttribute("contest", new Contest());
         return "contests";
     }
 
     @PostMapping("saveOrUpdate")
-    public String saveOrUpdate(@ModelAttribute Contest contest) {
-        tournamentService.saveContest(contest);
-        return "redirect:/contests";
+    public String saveOrUpdate(@RequestParam("tournament") Long tournamentId, @ModelAttribute Contest contest) {
+        tournamentService.saveContest(tournamentId, contest);
+        return "redirect:/contests?tournament="+tournamentId;
     }
 
     @GetMapping("delete/{id}")
-    public String deleteParticipant(@PathVariable Long id) {
+    public String deleteParticipant(@RequestParam("tournament") Long tournamentId, @PathVariable Long id) {
         contestRepository.delete(id);
-        return "redirect:/contests";
+        return "redirect:/contests?tournament="+tournamentId;
     }
 
     @GetMapping("edit/{id}")
-    public String editParticipant(@PathVariable Long id, Model model) {
+    public String editParticipant(@RequestParam("tournament") Long tournamentId, @PathVariable Long id, Model model) {
+        Tournament tournament = tournamentService.getTournamentById(tournamentId);
+        model.addAttribute("tournament", tournament);
         model.addAttribute("contests", contestRepository.findAll());
         Contest contest = contestRepository.findOne(id);
         model.addAttribute("contest", contest);

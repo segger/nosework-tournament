@@ -21,10 +21,6 @@ public class Event {
     private EventType type;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private Level level;
-
-    @Column
     private Time maxTime;
 
     //private points
@@ -62,14 +58,6 @@ public class Event {
         this.type = type;
     }
 
-    public Level getLevel() {
-        return level;
-    }
-
-    public void setLevel(Level level) {
-        this.level = level;
-    }
-
     public Time getMaxTime() {
         return maxTime;
     }
@@ -88,6 +76,6 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event[id=" + id + ", name=" + name + ", type=" + type + ", level=" + level + ", maxTime=" + maxTime + "]";
+        return "Event[id=" + id + ", name=" + name + ", type=" + type + ", maxTime=" + maxTime + "]";
     }
 }
