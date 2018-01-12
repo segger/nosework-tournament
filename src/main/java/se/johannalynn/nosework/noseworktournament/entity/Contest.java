@@ -21,11 +21,11 @@ public class Contest {
     private Date date;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Event> events;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "tournament_id")
     private Tournament tournament;
 

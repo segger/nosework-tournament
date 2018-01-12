@@ -31,7 +31,8 @@ public class TournamentService {
     }
 
     public Tournament getTournamentByContestId(Long contestId) {
-        return contestRepository.findOne(contestId).getTournament();
+        Contest contest = contestRepository.findOne(contestId);
+        return contest.getTournament();
     }
 
     public void saveParticipant(Long tournamentId, Participant participant) {

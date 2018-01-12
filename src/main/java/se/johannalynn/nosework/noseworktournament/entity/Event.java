@@ -1,10 +1,12 @@
 package se.johannalynn.nosework.noseworktournament.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 public class Event {
@@ -23,11 +25,14 @@ public class Event {
     @Column
     private Time maxTime;
 
-    //private points
+    @JsonManagedReference
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StashPoint> stashPoints;
+
     //results
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "contest_id")
     private Contest contest;
 
@@ -77,5 +82,13 @@ public class Event {
     @Override
     public String toString() {
         return "Event[id=" + id + ", name=" + name + ", type=" + type + ", maxTime=" + maxTime + "]";
+    }
+
+    public List<StashPoint> getStashPoints() {
+        return stashPoints;
+    }
+
+    public void setStashPoints(List<StashPoint> stashPoints) {
+        this.stashPoints = stashPoints;
     }
 }

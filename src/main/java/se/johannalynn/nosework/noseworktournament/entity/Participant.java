@@ -18,7 +18,7 @@ public class Participant {
     private String dog;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "tournament_id")
     private Tournament tournament;
 

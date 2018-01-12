@@ -20,11 +20,11 @@ public class Tournament {
     private Level level;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contest> contests;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Participant> participants;
 
     public Tournament() {
