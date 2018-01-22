@@ -22,15 +22,19 @@ public class FileService {
     TournamentRepository tournamentRepository;
 
     public Tournament loadSingleTournament(MultipartFile file) {
+        System.out.println("FileService.loadSingleTournament");
         String content = null;
         try {
             content = new String(file.getBytes());
+            System.out.println("content: " + content);
             Tournament tournament = mapper.readValue(content, Tournament.class);
             tournamentRepository.save(tournament);
 
             return tournament;
         } catch (IOException e) {
             //TODO: exception handling
+            System.out.println("msg=" + e.getMessage());
+            System.out.println("cause=" + e.getCause());
         }
         return null;
     }
@@ -52,8 +56,12 @@ public class FileService {
     }
 
     public byte[] exportTournament(String name) throws FileServiceException {
+        System.out.println("FileService.exportTournament [name=" + name + "]");
         Tournament tournament = tournamentRepository.findByName(name);
 
+        if(tournament.getParticipants() != null) {
+            System.out.println("nbrOfParticipants: " + tournament.getParticipants().size());
+        }
         try {
             byte[] buf = mapper.writeValueAsBytes(tournament);
             return buf;

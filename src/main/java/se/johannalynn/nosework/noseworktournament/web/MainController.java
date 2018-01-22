@@ -43,12 +43,13 @@ public class MainController {
         Tournament tournament = fileService.loadSingleTournament(file);
         if(tournament == null) {
             message = "Error during upload";
+            setAttributes(model);
         } else {
             message = "Successfully uploaded";
             model.addAttribute("tournaments", tournamentRepository.findAll());
             model.addAttribute("tournament", tournament);
         }
-        redirectAttributes.addFlashAttribute("importMessage", message);
+        model.addAttribute("importMessage", message);
         return "index";
     }
 }

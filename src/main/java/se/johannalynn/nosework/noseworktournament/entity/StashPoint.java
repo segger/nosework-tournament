@@ -1,6 +1,9 @@
 package se.johannalynn.nosework.noseworktournament.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
@@ -17,7 +20,6 @@ public class StashPoint {
     @Column
     private int points;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;

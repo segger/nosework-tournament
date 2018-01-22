@@ -1,8 +1,5 @@
 package se.johannalynn.nosework.noseworktournament.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
@@ -20,11 +17,9 @@ public class Contest {
     @Column
     private Date date;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Event> events;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "tournament_id")
     private Tournament tournament;

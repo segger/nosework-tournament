@@ -1,8 +1,9 @@
 package se.johannalynn.nosework.noseworktournament.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Participant {
@@ -17,7 +18,9 @@ public class Participant {
     @Column
     private String dog;
 
-    @JsonBackReference
+    //@OneToMany(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private List<Result> results;
+
     @ManyToOne
     @JoinColumn(name = "tournament_id")
     private Tournament tournament;

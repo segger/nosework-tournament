@@ -14,6 +14,7 @@ import se.johannalynn.nosework.noseworktournament.entity.Tournament;
 import se.johannalynn.nosework.noseworktournament.service.TournamentService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @Controller
 @RequestMapping("/events")

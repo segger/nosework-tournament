@@ -8,12 +8,12 @@
 
 <div th:replace="fragments/header :: header">&nbsp;</div>
 
-<h4>Noseworktunering</h4>
 <h3 th:text="${tournament.name}" />
 
 <ul>
     <li><a th:href="@{/participants(tournament=${tournament.id})}">Deltagare</a></li>
     <li><a th:href="@{/contests(tournament=${tournament.id})}">Deltävlingar</a></li>
+    <li><a th:href="@{/results(tournament=${tournament.id})}">Resultat</a></li>
 </ul>
 
 <div>

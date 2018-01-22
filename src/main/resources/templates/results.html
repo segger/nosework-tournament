@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Noseworktunering</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">&nbsp;</div>
+
+<h3>Results</h3>
+<h4>Tunering</h4>
+<div>
+    <span th:each="contest : ${tournament.contests}">
+        <a th:href="@{'/results/contest/' + ${contest.id}(tournament=${tournament.id})}"><span th:text="${contest.name}"/></a>
+    </span>
+</div>
+
+<div th:if="${contest != null}">
+    <div>
+    <span th:each="event : ${contest.events}">
+        <a th:href="@{'/results/event/' + ${event.id}(tournament=${tournament.id})}"><span th:text="${event.name}"/></a>
+    </span>
+    </div>
+</div>
+
+<table>
+    <thead><th>Ekipage</th><th>Poäng</th><th>Placering</th></thead>
+    <tbody>
+        <tr th:each="result : ${tournamentResult}">
+            <td><span th:text="${result.participant.owner} + ' och ' + ${result.participant.dog}" /></td>
+            <td><span th:text="${result.totalPoints}" /></td>
+            <td><span th:text="${result.placement}" /></td>
+        </tr>
+    </tbody>
+</table>
+
+<div th:if="${contestResult != null}">
+<h4>Deltävling</h4>
+<table>
+    <thead><th>Ekipage</th><th>Poäng</th><th>Placering</th></thead>
+    <tbody>
+        <tr th:each="result : ${contestResult}">
+            <td><span th:text="${result.participant.owner} + ' och ' + ${result.participant.dog}" /></td>
+            <td><span th:text="${result.totalPoints}" /></td>
+            <td><span th:text="${result.placement}" /></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<div th:if="${event != null and event.results != null}">
+<h4>Sök</h4>
+<table>
+    <thead><th>Ekipage</th><th>Tid</th><th>SSE</th><th>Fel</th><th>Poäng</th></thead>
+    <tbody>
+        <tr th:each="result : ${event.results}">
+            <td><span th:text="${result.participant.owner} + ' och ' + ${result.participant.dog}" /></td>
+            <td><span th:text="${result.time}" /></td>
+            <td><span th:text="${result.sse}" /></td>
+            <td><!--<span th:text="${result.error}" /> --></td>
+            <td><!--<span th:text="${result.points}" /> --></td>
+        </tr>
+    </tbody>
+</table>
+
+    <!--
+<h6>Lägg till resultat</h6>
+<form action="#" th:action="@{/results/saveOrUpdate(event=${event.id})}" th:object="${result}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <p>Ekipage: <input type="text" th:field="*{participant}" /></p>
+    <p>Tid: <input type="text" th:field="*{time}" /></p>
+    <p>SSE: <input type="text" th:field="*{sse}" /></p>
+    <p>Felpoäng:</p>
+    <p>1p: <input type="text" /></p>
+    <p>3p: <input type="text" /></p>
+    <p>Poäng:</p>
+    <p></p>
+    <p><input type="submit" value="Lägg till" /></p>
+</form>
+-->
+</div>
+
+</body>
+</html>
