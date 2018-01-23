@@ -3,15 +3,15 @@ package se.johannalynn.nosework.noseworktournament.model;
 import se.johannalynn.nosework.noseworktournament.entity.Participant;
 
 public abstract class Result {
-    private Participant participant;
+    private String participant;
     private int totalPoints;
     private String placement;
 
-    public Participant getParticipant() {
+    public String getParticipant() {
         return participant;
     }
 
-    public void setParticipant(Participant participant) {
+    public void setParticipant(String participant) {
         this.participant = participant;
     }
 

@@ -7,7 +7,7 @@
 <body>
 
 <div th:replace="fragments/header :: header">&nbsp;</div>
-
+<a th:href="@{/contests(tournament=${tournament.id})}">Tillbaka till deltävlingar</a>
 <h4>Sök</h4>
 <table>
     <thead><th>Namn</th><th>Typ</th><th>Maxtid</th><th>Gömmor</th><th></th></thead>

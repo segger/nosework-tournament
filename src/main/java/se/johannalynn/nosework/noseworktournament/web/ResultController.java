@@ -65,6 +65,7 @@ public class ResultController {
         model.addAttribute("contest", contest);
         model.addAttribute("contestResult", resultService.getContestResult(contest));
         model.addAttribute("event", event);
+        model.addAttribute("eventResult", resultService.getEventResult(event));
         model.addAttribute("result", new Result());
         return "results";
     }
@@ -94,6 +95,7 @@ public class ResultController {
         model.addAttribute("contest", contest);
         model.addAttribute("contestResult", resultService.getContestResult(contest));
         model.addAttribute("event", event);
+        model.addAttribute("eventResult", resultService.getEventResult(event));
         Result result = resultRepository.findOne(id);
         model.addAttribute("result", result);
         return "results";
