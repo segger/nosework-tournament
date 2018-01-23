@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import se.johannalynn.nosework.noseworktournament.domain.ContestRepository;
 import se.johannalynn.nosework.noseworktournament.domain.EventRepository;
 import se.johannalynn.nosework.noseworktournament.domain.ParticipantRepository;
-import se.johannalynn.nosework.noseworktournament.entity.Contest;
-import se.johannalynn.nosework.noseworktournament.entity.Event;
-import se.johannalynn.nosework.noseworktournament.entity.Participant;
-import se.johannalynn.nosework.noseworktournament.entity.Tournament;
+import se.johannalynn.nosework.noseworktournament.domain.ResultRepository;
+import se.johannalynn.nosework.noseworktournament.entity.*;
 import se.johannalynn.nosework.noseworktournament.model.ContestResult;
 import se.johannalynn.nosework.noseworktournament.model.TournamentResult;
 import se.johannalynn.nosework.noseworktournament.service.ResultService;
@@ -28,6 +26,9 @@ public class ResultController {
 
     @Autowired
     EventRepository eventRepository;
+
+    @Autowired
+    ResultRepository resultRepository;
 
     @Autowired
     TournamentService tournamentService;
@@ -64,6 +65,37 @@ public class ResultController {
         model.addAttribute("contest", contest);
         model.addAttribute("contestResult", resultService.getContestResult(contest));
         model.addAttribute("event", event);
+        model.addAttribute("result", new Result());
+        return "results";
+    }
+
+    @PostMapping("saveOrUpdate")
+    public String saveOrUpdate(@RequestParam("tournament") Long tournamentId, @RequestParam("event") Long eventId,
+                               @ModelAttribute Result result, Model model) {
+        Event event = eventRepository.findOne(eventId);
+        result.setEvent(event);
+        resultRepository.save(result);
+        return "redirect:/results/event/" + eventId + "?tournament=" + tournamentId;
+    }
+
+    @GetMapping("delete/{id}")
+    public String deleteResult(@RequestParam("tournament") Long tournamentId, @RequestParam("event") Long eventId, @PathVariable Long id) {
+        resultRepository.delete(id);
+        return "redirect:/results/event/" + eventId + "?tournament="+tournamentId;
+    }
+
+    @GetMapping("edit/{id}")
+    public String editResult(@RequestParam("tournament") Long tournamentId, @RequestParam("event") Long eventId, @PathVariable Long id, Model model) {
+        Tournament tournament = tournamentService.getTournamentById(tournamentId);
+        model.addAttribute("tournament", tournament);
+        model.addAttribute("tournamentResult", resultService.getTournamentResult(tournament));
+        Event event = eventRepository.findOne(eventId);
+        Contest contest = event.getContest();
+        model.addAttribute("contest", contest);
+        model.addAttribute("contestResult", resultService.getContestResult(contest));
+        model.addAttribute("event", event);
+        Result result = resultRepository.findOne(id);
+        model.addAttribute("result", result);
         return "results";
     }
 }

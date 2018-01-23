@@ -2,14 +2,8 @@ package se.johannalynn.nosework.noseworktournament.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.johannalynn.nosework.noseworktournament.domain.ContestRepository;
-import se.johannalynn.nosework.noseworktournament.domain.EventRepository;
-import se.johannalynn.nosework.noseworktournament.domain.ParticipantRepository;
-import se.johannalynn.nosework.noseworktournament.domain.TournamentRepository;
-import se.johannalynn.nosework.noseworktournament.entity.Contest;
-import se.johannalynn.nosework.noseworktournament.entity.Event;
-import se.johannalynn.nosework.noseworktournament.entity.Participant;
-import se.johannalynn.nosework.noseworktournament.entity.Tournament;
+import se.johannalynn.nosework.noseworktournament.domain.*;
+import se.johannalynn.nosework.noseworktournament.entity.*;
 
 @Service
 public class TournamentService {

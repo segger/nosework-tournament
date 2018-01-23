@@ -60,4 +60,12 @@ public class Result {
     public void setEvent(Event event) {
         this.event = event;
     }
+
+    public String getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(String participant) {
+        this.participant = participant;
+    }
 }

@@ -60,13 +60,14 @@
             <td><span th:text="${result.sse}" /></td>
             <td><!--<span th:text="${result.error}" /> --></td>
             <td><!--<span th:text="${result.points}" /> --></td>
+            <td><a th:href="@{'/results/edit/' + ${result.id}(tournament=${tournament.id},event=${event.id})}">Ändra/Lägg till</a></td>
+            <td><a th:href="@{'/results/delete/' + ${result.id}(tournament=${tournament.id},event=${event.id})}">Ta bort</a></td>
         </tr>
     </tbody>
 </table>
 
-    <!--
 <h6>Lägg till resultat</h6>
-<form action="#" th:action="@{/results/saveOrUpdate(event=${event.id})}" th:object="${result}" method="post">
+<form action="#" th:action="@{/results/saveOrUpdate(tournament=${tournament.id},event=${event.id})}" th:object="${result}" method="post">
     <input type="hidden" th:field="*{id}" />
     <p>Ekipage: <input type="text" th:field="*{participant}" /></p>
     <p>Tid: <input type="text" th:field="*{time}" /></p>
@@ -78,7 +79,6 @@
     <p></p>
     <p><input type="submit" value="Lägg till" /></p>
 </form>
--->
 </div>
 
 </body>
