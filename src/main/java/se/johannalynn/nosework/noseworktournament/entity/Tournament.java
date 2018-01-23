@@ -1,5 +1,7 @@
 package se.johannalynn.nosework.noseworktournament.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,9 +19,11 @@ public class Tournament {
     @Enumerated(EnumType.STRING)
     private Level level;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contest> contests;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Participant> participants;
 

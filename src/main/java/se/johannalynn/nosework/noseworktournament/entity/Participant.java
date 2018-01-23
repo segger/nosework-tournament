@@ -21,6 +21,7 @@ public class Participant {
     //@OneToMany(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
     //private List<Result> results;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "tournament_id")
     private Tournament tournament;

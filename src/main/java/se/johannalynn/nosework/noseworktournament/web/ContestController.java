@@ -23,7 +23,7 @@ public class ContestController {
     public String getParticipants(@RequestParam("tournament") Long tournamentId, Model model) {
         Tournament tournament = tournamentService.getTournamentById(tournamentId);
         model.addAttribute("tournament", tournament);
-        model.addAttribute("contests", contestRepository.findAll());
+        model.addAttribute("contests", contestRepository.findAllByTournament(tournament));
         model.addAttribute("contest", new Contest());
         return "contests";
     }
@@ -44,7 +44,7 @@ public class ContestController {
     public String editParticipant(@RequestParam("tournament") Long tournamentId, @PathVariable Long id, Model model) {
         Tournament tournament = tournamentService.getTournamentById(tournamentId);
         model.addAttribute("tournament", tournament);
-        model.addAttribute("contests", contestRepository.findAll());
+        model.addAttribute("contests", contestRepository.findAllByTournament(tournament));
         Contest contest = contestRepository.findOne(id);
         model.addAttribute("contest", contest);
         return "contests";

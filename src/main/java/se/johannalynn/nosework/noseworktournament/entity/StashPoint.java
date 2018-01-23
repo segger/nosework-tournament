@@ -20,6 +20,7 @@ public class StashPoint {
     @Column
     private int points;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
