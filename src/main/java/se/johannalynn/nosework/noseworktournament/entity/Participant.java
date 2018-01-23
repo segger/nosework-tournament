@@ -18,9 +18,6 @@ public class Participant {
     @Column
     private String dog;
 
-    //@OneToMany(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private List<Result> results;
-
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "tournament_id")

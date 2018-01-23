@@ -28,8 +28,9 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StashPoint> stashPoints;
 
-    //@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private List<Result> results;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Result> results;
 
     @JsonBackReference
     @ManyToOne
@@ -85,5 +86,13 @@ public class Event {
 
     public void setStashPoints(List<StashPoint> stashPoints) {
         this.stashPoints = stashPoints;
+    }
+
+    public List<Result> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
     }
 }

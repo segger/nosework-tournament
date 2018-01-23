@@ -13,6 +13,7 @@ import se.johannalynn.nosework.noseworktournament.entity.Participant;
 import se.johannalynn.nosework.noseworktournament.entity.Tournament;
 import se.johannalynn.nosework.noseworktournament.model.ContestResult;
 import se.johannalynn.nosework.noseworktournament.model.TournamentResult;
+import se.johannalynn.nosework.noseworktournament.service.ResultService;
 import se.johannalynn.nosework.noseworktournament.service.TournamentService;
 
 import java.util.ArrayList;
@@ -31,47 +32,25 @@ public class ResultController {
     @Autowired
     TournamentService tournamentService;
 
+    @Autowired
+    ResultService resultService;
+
     @GetMapping(value = {"","/*"})
     public String getTournamentResult(@RequestParam("tournament") Long tournamentId, Model model) {
         Tournament tournament = tournamentService.getTournamentById(tournamentId);
         model.addAttribute("tournament", tournament);
-        model.addAttribute("tournamentResult", mockTournamentResult());
+        model.addAttribute("tournamentResult", resultService.getTournamentResult(tournament));
         return "results";
-    }
-
-    private List<TournamentResult> mockTournamentResult() {
-        List<TournamentResult> tournamentResult = new ArrayList<>();
-        TournamentResult mockResult1 = new TournamentResult();
-        Participant participant1 = new Participant();
-        participant1.setOwner("Alpha");
-        participant1.setDog("Doggie");
-        mockResult1.setParticipant(participant1);
-        mockResult1.setPlacement("1");
-        mockResult1.setTotalPoints(175);
-        tournamentResult.add(mockResult1);
-        return tournamentResult;
-    }
-
-    private List<ContestResult> mockContestResult(Long id) {
-        List<ContestResult> contestResults = new ArrayList<>();
-        ContestResult mockResult1 = new ContestResult();
-        Participant participant1 = new Participant();
-        participant1.setOwner("Alpha");
-        participant1.setDog("Doggie");
-        mockResult1.setParticipant(participant1);
-        mockResult1.setPlacement("1");
-        mockResult1.setTotalPoints(100);
-        contestResults.add(mockResult1);
-        return contestResults;
     }
 
     @GetMapping("contest/{id}")
     public String selectContest(@PathVariable("id") Long contestId, @RequestParam("tournament") Long tournamentId, Model model) {
         Tournament tournament = tournamentService.getTournamentById(tournamentId);
         model.addAttribute("tournament", tournament);
-        model.addAttribute("tournamentResult", mockTournamentResult());
-        model.addAttribute("contest", contestRepository.findOne(contestId));
-        model.addAttribute("contestResult", mockContestResult(contestId));
+        model.addAttribute("tournamentResult", resultService.getTournamentResult(tournament));
+        Contest contest = contestRepository.findOne(contestId);
+        model.addAttribute("contest", contest);
+        model.addAttribute("contestResult", resultService.getContestResult(contest));
         return "results";
     }
 
@@ -79,11 +58,11 @@ public class ResultController {
     public String selectEvent(@PathVariable("id") Long eventId, @RequestParam("tournament") Long tournamentId, Model model) {
         Tournament tournament = tournamentService.getTournamentById(tournamentId);
         model.addAttribute("tournament", tournament);
-        model.addAttribute("tournamentResult", mockTournamentResult());
+        model.addAttribute("tournamentResult", resultService.getTournamentResult(tournament));
         Event event = eventRepository.findOne(eventId);
         Contest contest = event.getContest();
         model.addAttribute("contest", contest);
-        model.addAttribute("contestResult", mockContestResult(contest.getId()));
+        model.addAttribute("contestResult", resultService.getContestResult(contest));
         model.addAttribute("event", event);
         return "results";
     }

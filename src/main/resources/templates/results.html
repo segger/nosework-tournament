@@ -28,7 +28,7 @@
     <thead><th>Ekipage</th><th>Poäng</th><th>Placering</th></thead>
     <tbody>
         <tr th:each="result : ${tournamentResult}">
-            <td><span th:text="${result.participant.owner} + ' och ' + ${result.participant.dog}" /></td>
+            <td><span th:text="${result.participant}" /></td>
             <td><span th:text="${result.totalPoints}" /></td>
             <td><span th:text="${result.placement}" /></td>
         </tr>
@@ -41,7 +41,7 @@
     <thead><th>Ekipage</th><th>Poäng</th><th>Placering</th></thead>
     <tbody>
         <tr th:each="result : ${contestResult}">
-            <td><span th:text="${result.participant.owner} + ' och ' + ${result.participant.dog}" /></td>
+            <td><span th:text="${result.participant}" /></td>
             <td><span th:text="${result.totalPoints}" /></td>
             <td><span th:text="${result.placement}" /></td>
         </tr>
@@ -55,7 +55,7 @@
     <thead><th>Ekipage</th><th>Tid</th><th>SSE</th><th>Fel</th><th>Poäng</th></thead>
     <tbody>
         <tr th:each="result : ${event.results}">
-            <td><span th:text="${result.participant.owner} + ' och ' + ${result.participant.dog}" /></td>
+            <td><span th:text="${result.participant}" /></td>
             <td><span th:text="${result.time}" /></td>
             <td><span th:text="${result.sse}" /></td>
             <td><!--<span th:text="${result.error}" /> --></td>

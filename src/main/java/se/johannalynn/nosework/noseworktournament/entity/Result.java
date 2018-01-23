@@ -13,18 +13,18 @@ public class Result {
     private Long id;
 
     @Column
+    private String participant;
+
+    @Column
     private Time time;
 
     @Column
     private Boolean sse;
 
-    //unique combination participant & event
+    //Poäng
+    //Felpoäng
 
-    //@JsonBackReference(value = "participant")
-    //@ManyToOne
-    //@JoinColumn(name = "participant_id")
-    //private Participant participant;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
@@ -36,15 +36,7 @@ public class Result {
     public void setId(Long id) {
         this.id = id;
     }
-/*
-    public Participant getParticipant() {
-        return participant;
-    }
 
-    public void setParticipant(Participant participant) {
-        this.participant = participant;
-    }
-*/
     public Time getTime() {
         return time;
     }
@@ -68,8 +60,4 @@ public class Result {
     public void setEvent(Event event) {
         this.event = event;
     }
-
-    //felpoäng
-    //stashpoint
-
 }
