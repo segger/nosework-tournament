@@ -49,22 +49,24 @@
 </table>
 </div>
 
-<div th:if="${event != null and event.results != null}">
+<div th:if="${event != null}">
+    <div th:if="${eventResult != null}">
 <h4>Sök</h4>
 <table>
     <thead><th>Ekipage</th><th>Tid</th><th>SSE</th><th>Fel</th><th>Poäng</th></thead>
     <tbody>
-        <tr th:each="result : ${event.results}">
+        <tr th:each="result : ${eventResult}">
             <td><span th:text="${result.participant}" /></td>
             <td><span th:text="${result.time}" /></td>
             <td><span th:text="${result.sse}" /></td>
-            <td><!--<span th:text="${result.error}" /> --></td>
-            <td><!--<span th:text="${result.points}" /> --></td>
+            <td><span th:text="${result.error}" /></td>
+            <td><span th:text="${result.points}" /></td>
             <td><a th:href="@{'/results/edit/' + ${result.id}(tournament=${tournament.id},event=${event.id})}">Ändra/Lägg till</a></td>
             <td><a th:href="@{'/results/delete/' + ${result.id}(tournament=${tournament.id},event=${event.id})}">Ta bort</a></td>
         </tr>
     </tbody>
 </table>
+    </div>
 
 <h6>Lägg till resultat</h6>
 <form action="#" th:action="@{/results/saveOrUpdate(tournament=${tournament.id},event=${event.id})}" th:object="${result}" method="post">
@@ -73,10 +75,11 @@
     <p>Tid: <input type="text" th:field="*{time}" /></p>
     <p>SSE: <input type="text" th:field="*{sse}" /></p>
     <p>Felpoäng:</p>
-    <p>1p: <input type="text" /></p>
-    <p>3p: <input type="text" /></p>
+    <p>1p: <input type="text" th:field="*{errorOnePoints}" /></p>
+    <p>2p: <input type="text" th:field="*{errorTwoPoints}" /></p>
+    <p>3p: <input type="text" th:field="*{errorThreePoints}" /></p>
     <p>Poäng:</p>
-    <p></p>
+    <p><input type="text" th:field="*{stashesFound}" /></p>
     <p><input type="submit" value="Lägg till" /></p>
 </form>
 </div>

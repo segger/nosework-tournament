@@ -1,9 +1,11 @@
 package se.johannalynn.nosework.noseworktournament.entity;
 
 import com.fasterxml.jackson.annotation.*;
+import se.johannalynn.nosework.noseworktournament.util.PointConverter;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 public class Result {
@@ -21,8 +23,17 @@ public class Result {
     @Column
     private Boolean sse;
 
-    //Poäng
-    //Felpoäng
+    @Column
+    private String stashesFound;
+
+    @Column
+    private int errorOnePoints;
+
+    @Column
+    private int errorTwoPoints;
+
+    @Column
+    private int errorThreePoints;
 
     @JsonBackReference
     @ManyToOne
@@ -67,5 +78,37 @@ public class Result {
 
     public void setParticipant(String participant) {
         this.participant = participant;
+    }
+
+    public String getStashesFound() {
+        return stashesFound;
+    }
+
+    public void setStashesFound(String stashesFound) {
+        this.stashesFound = stashesFound;
+    }
+
+    public int getErrorOnePoints() {
+        return errorOnePoints;
+    }
+
+    public void setErrorOnePoints(int errorOnePoints) {
+        this.errorOnePoints = errorOnePoints;
+    }
+
+    public int getErrorTwoPoints() {
+        return errorTwoPoints;
+    }
+
+    public void setErrorTwoPoints(int errorTwoPoints) {
+        this.errorTwoPoints = errorTwoPoints;
+    }
+
+    public int getErrorThreePoints() {
+        return errorThreePoints;
+    }
+
+    public void setErrorThreePoints(int errorThreePoints) {
+        this.errorThreePoints = errorThreePoints;
     }
 }

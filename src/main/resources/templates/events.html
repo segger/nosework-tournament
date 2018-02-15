@@ -21,7 +21,7 @@
                     <thead><th>Nummer</th><th>Poäng</th></thead>
                     <tbody>
                         <tr th:each="stash : ${event.stashPoints}">
-                            <td><span th:text="${stash.index}" /></td>
+                            <td><span th:text="${stash.stashName}" /></td>
                             <td><span th:text="${stash.points}" /></td>
                             <td><a th:href="@{'/events/stashes/edit/' + ${stash.id}(contest=${contest})}">Ändra</a></td>
                             <td><a th:href="@{'/events/stashes/delete/' + ${stash.id}(contest=${contest})}">Ta bort</a></td>
@@ -49,7 +49,7 @@
 <p th:text="${event.name}"></p>
 <form action="#" th:action="@{/events/stashes/saveOrUpdate(contest=${contest},event=${event.id})}" th:object="${stash}" method="post">
     <input type="hidden" th:field="*{id}" />
-    <p>Index: <input type="text" th:field="*{index}" /></p>
+    <p>Namn: <input type="text" th:field="*{stashName}" /></p>
     <p>Poäng: <input type="text" th:field="*{points}" /></p>
     <p><input type="submit" value="Lägg till" /></p>
 </form>

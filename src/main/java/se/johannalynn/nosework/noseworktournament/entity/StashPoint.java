@@ -15,7 +15,7 @@ public class StashPoint {
     private Long id;
 
     @Column
-    private int index;
+    private String stashName;
 
     @Column
     private int points;
@@ -33,12 +33,12 @@ public class StashPoint {
         this.id = id;
     }
 
-    public int getIndex() {
-        return index;
+    public String getStashName() {
+        return stashName;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setStashName(String stashName) {
+        this.stashName = stashName;
     }
 
     public int getPoints() {
