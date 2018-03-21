@@ -4,7 +4,7 @@ databaseChangeLog:
       author: segger
       changes:
         - createTable:
-            tableName: participant
+            tableName: result
             columns:
               - column:
                   name: id
@@ -14,13 +14,18 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: owner
+                  name: participant
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: dog
-                  type: varchar(255)
+                  name: time
+                  type: time
+                  constraints:
+                    nullable: true
+              - column:
+                  name: sse
+                  type: boolean
                   constraints:
                     nullable: false
   - changeSet:
@@ -28,11 +33,14 @@ databaseChangeLog:
       author: segger
       changes:
         - insert:
-            tableName: participant
+            tableName: result
             columns:
               - column:
-                  name: owner
-                  value: Johanna
+                  name: participant
+                  value: Alpha och Omega
               - column:
-                  name: dog
-                  value: Kira
+                  name: time
+                  value: null
+              - column:
+                  name: sse
+                  value: false
