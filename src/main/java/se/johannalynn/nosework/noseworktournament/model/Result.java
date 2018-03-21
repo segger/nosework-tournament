@@ -1,8 +1,6 @@
 package se.johannalynn.nosework.noseworktournament.model;
 
-import se.johannalynn.nosework.noseworktournament.entity.Participant;
-
-public abstract class Result {
+public class Result {
     private String participant;
     private int totalPoints;
     private String placement;
