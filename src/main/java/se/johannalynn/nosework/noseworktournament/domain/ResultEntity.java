@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.sql.Time;
 
 @Entity
-@Table(name = "result")
+@Table(name = "result", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"participant", "event"})
+})
 public class ResultEntity {
 
     @Id
@@ -12,13 +14,24 @@ public class ResultEntity {
     private Long id;
 
     @Column
-    private String participant;
-
-    @Column
     private Time time;
 
     @Column
-    private Boolean sse;
+    private boolean sse;
+
+    @Column
+    private int errorPoints;
+
+    @Column
+    private int points;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "participant")
+    private ParticipantEntity participant;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event")
+    private EventEntity event;
 
     public Long getId() {
         return id;
@@ -26,14 +39,6 @@ public class ResultEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getParticipant() {
-        return participant;
-    }
-
-    public void setParticipant(String participant) {
-        this.participant = participant;
     }
 
     public Time getTime() {
@@ -44,11 +49,43 @@ public class ResultEntity {
         this.time = time;
     }
 
-    public Boolean getSse() {
+    public boolean isSse() {
         return sse;
     }
 
-    public void setSse(Boolean sse) {
+    public void setSse(boolean sse) {
         this.sse = sse;
+    }
+
+    public int getErrorPoints() {
+        return errorPoints;
+    }
+
+    public void setErrorPoints(int errorPoints) {
+        this.errorPoints = errorPoints;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public ParticipantEntity getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(ParticipantEntity participant) {
+        this.participant = participant;
+    }
+
+    public EventEntity getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventEntity event) {
+        this.event = event;
     }
 }

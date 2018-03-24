@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1000
+      author: segger
+      changes:
+        - createTable:
+            tableName: participant
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: owner
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: dog
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 1001
+      author: segger
+      changes:
+        - createTable:
+            tableName: result
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: participant
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time
+                  type: time
+                  constraints:
+                    nullable: true
+              - column:
+                  name: sse
+                  type: boolean
+                  constraints:
+                    nullable: false
