@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2000
+      author: segger
+      changes:
+        - insert:
+            tableName: result
+            columns:
+              - column:
+                  name: participant
+                  value: Alpha och Omega
+              - column:
+                  name: time
+                  value: null
+              - column:
+                  name: sse
+                  value: false

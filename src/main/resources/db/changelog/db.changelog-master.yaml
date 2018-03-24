@@ -1,46 +1,5 @@
 databaseChangeLog:
-  - changeSet:
-      id: 1
-      author: segger
-      changes:
-        - createTable:
-            tableName: result
-            columns:
-              - column:
-                  name: id
-                  type: int
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: participant
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: time
-                  type: time
-                  constraints:
-                    nullable: true
-              - column:
-                  name: sse
-                  type: boolean
-                  constraints:
-                    nullable: false
-  - changeSet:
-      id: 2
-      author: segger
-      changes:
-        - insert:
-            tableName: result
-            columns:
-              - column:
-                  name: participant
-                  value: Alpha och Omega
-              - column:
-                  name: time
-                  value: null
-              - column:
-                  name: sse
-                  value: false
+    - include:
+        file: db/changelog/db.changelog-tables.yaml
+    - include:
+        file: db/changelog/db.changelog-data.yaml

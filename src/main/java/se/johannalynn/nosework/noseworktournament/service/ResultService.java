@@ -22,7 +22,6 @@ public class ResultService {
         while(itr.hasNext()) {
             ResultEntity entity = itr.next();
             Result result = new Result();
-            result.setParticipant(entity.getParticipant());
             resultList.add(result);
         }
         return resultList;
