@@ -6,4 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "tournaments", path = "tournaments")
 public interface TournamentRepository extends CrudRepository<TournamentEntity, Long> {
 
+    TournamentEntity findByName(String name);
 }
