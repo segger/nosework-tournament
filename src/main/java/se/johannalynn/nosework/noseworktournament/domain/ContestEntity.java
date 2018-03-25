@@ -2,6 +2,7 @@ package se.johannalynn.nosework.noseworktournament.domain;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "contest")
@@ -16,6 +17,9 @@ public class ContestEntity {
 
     @Column
     private Date date;
+
+    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<EventEntity> events;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tournament")
@@ -51,5 +55,13 @@ public class ContestEntity {
 
     public void setTournament(TournamentEntity tournament) {
         this.tournament = tournament;
+    }
+
+    public Set<EventEntity> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<EventEntity> events) {
+        this.events = events;
     }
 }

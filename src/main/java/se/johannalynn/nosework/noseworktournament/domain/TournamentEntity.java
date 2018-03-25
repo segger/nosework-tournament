@@ -17,9 +17,13 @@ public class TournamentEntity {
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ContestEntity> contests;
 
-    /*
-    @ManyToMany
-    private Set<ParticipantEntity> participants;*/
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "tournaments")
+    private Set<ParticipantEntity> participants;
 
     public Long getId() {
         return id;
@@ -43,5 +47,13 @@ public class TournamentEntity {
 
     public void setContests(Set<ContestEntity> contests) {
         this.contests = contests;
+    }
+
+    public Set<ParticipantEntity> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Set<ParticipantEntity> participants) {
+        this.participants = participants;
     }
 }

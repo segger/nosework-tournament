@@ -1,9 +1,17 @@
 package se.johannalynn.nosework.noseworktournament.model;
 
 public class Result {
-    private String participant;
-    private int totalPoints;
-    private String placement;
+    protected String placement;
+    protected String participant;
+    protected int points;
+
+    public String getPlacement() {
+        return placement;
+    }
+
+    public void setPlacement(String placement) {
+        this.placement = placement;
+    }
 
     public String getParticipant() {
         return participant;
@@ -13,19 +21,11 @@ public class Result {
         this.participant = participant;
     }
 
-    public int getTotalPoints() {
-        return totalPoints;
+    public int getPoints() {
+        return points;
     }
 
-    public void setTotalPoints(int totalPoints) {
-        this.totalPoints = totalPoints;
-    }
-
-    public String getPlacement() {
-        return placement;
-    }
-
-    public void setPlacement(String placement) {
-        this.placement = placement;
+    public void setPoints(int points) {
+        this.points = points;
     }
 }
