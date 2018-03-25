@@ -7,7 +7,7 @@ import java.sql.Time;
 @Table(name = "result", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"participant", "event"})
 })
-public class ResultEntity {
+public class ProtocolEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -25,11 +25,11 @@ public class ResultEntity {
     @Column
     private int points;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "participant")
     private ParticipantEntity participant;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "event")
     private EventEntity event;
 

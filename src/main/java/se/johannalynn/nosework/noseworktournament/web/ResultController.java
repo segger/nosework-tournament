@@ -13,8 +13,9 @@ public class ResultController {
     @Autowired
     ResultService resultService;
 
-    @GetMapping("/tournament/{id}/results")
-    public List<Result> getResults(@PathVariable("id") final long tournamentId) {
-        return resultService.getResults();
+    @GetMapping("/results/{id}")
+    public List<? extends Result> getResults(@PathVariable("id") final long id,
+                                   @RequestParam("type") final String type) {
+        return resultService.getResults(id, type);
     }
 }
