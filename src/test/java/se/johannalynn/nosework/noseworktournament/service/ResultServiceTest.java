@@ -44,10 +44,14 @@ public class ResultServiceTest {
         EventEntity mockedEvent = new EventEntity();
         given(eventMock.findOne(id)).willReturn(mockedEvent);
         List<ProtocolEntity> protocols = new ArrayList<>();
-        ProtocolEntity first = createProtocolEntity(1L, mockedEvent, false, 25, "00:10", 0, "A");
-        ProtocolEntity third = createProtocolEntity(10L, mockedEvent, false, 25, "00:10", 2,"C");
-        ProtocolEntity forth = createProtocolEntity(23L, mockedEvent, true, 0, "01:30", 0,"D");
-        ProtocolEntity second = createProtocolEntity(2L, mockedEvent, false, 25, "00:20", 0,"B");
+        ProtocolEntity first = createProtocolEntity(1L, mockedEvent, false, 25, "00:10", 0,
+                1L, "A");
+        ProtocolEntity third = createProtocolEntity(10L, mockedEvent, false, 25, "00:10", 2,
+                2L, "C");
+        ProtocolEntity forth = createProtocolEntity(23L, mockedEvent, true, 0, "01:30", 0,
+                3L, "D");
+        ProtocolEntity second = createProtocolEntity(2L, mockedEvent, false, 25, "00:20", 0,
+                4L, "B");
         protocols.add(first);
         protocols.add(third);
         protocols.add(forth);
@@ -56,7 +60,7 @@ public class ResultServiceTest {
 
         List<? extends Result> result = unitUnderTest.getResults(id, "EVENT");
         assertEquals(4, result.size());
-        assertEquals("A & A", result.get(0).getParticipant());
+        assertEquals("A & A", result.get(0).getParticipant().getPresentation());
     }
 
     @Test
@@ -66,8 +70,10 @@ public class ResultServiceTest {
         given(eventMock.findOne(id)).willReturn(mockedEvent);
 
         List<ProtocolEntity> protocols = new ArrayList<>();
-        ProtocolEntity protocol1 = createProtocolEntity(10L, mockedEvent, false, 0, "00:10", 0,"C");
-        ProtocolEntity protocol2 = createProtocolEntity(1L, mockedEvent, false, 25, "00:10", 0, "A");
+        ProtocolEntity protocol1 = createProtocolEntity(10L, mockedEvent, false, 0, "00:10",
+                0,1L,"C");
+        ProtocolEntity protocol2 = createProtocolEntity(1L, mockedEvent, false, 25, "00:10",
+                0, 2L, "A");
         protocols.add(protocol1);
         protocols.add(protocol2);
 
@@ -77,7 +83,7 @@ public class ResultServiceTest {
 
         List<? extends Result> result = unitUnderTest.getResults(id, "EVENT");
         assertEquals(2, result.size());
-        assertEquals("A & A", result.get(0).getParticipant());
+        assertEquals("A & A", result.get(0).getParticipant().getPresentation());
     }
 
     @Test
@@ -87,8 +93,10 @@ public class ResultServiceTest {
         given(eventMock.findOne(id)).willReturn(mockedEvent);
 
         List<ProtocolEntity> protocols = new ArrayList<>();
-        ProtocolEntity protocol1 = createProtocolEntity(10L, mockedEvent, false, 25, "00:10", 1,"C");
-        ProtocolEntity protocol2 = createProtocolEntity(1L, mockedEvent, false, 25, "00:10", 0, "A");
+        ProtocolEntity protocol1 = createProtocolEntity(10L, mockedEvent, false, 25, "00:10",
+                1,1L, "C");
+        ProtocolEntity protocol2 = createProtocolEntity(1L, mockedEvent, false, 25, "00:10",
+                0, 2L, "A");
         protocols.add(protocol1);
         protocols.add(protocol2);
 
@@ -98,7 +106,7 @@ public class ResultServiceTest {
 
         List<? extends Result> result = unitUnderTest.getResults(id, "EVENT");
         assertEquals(2, result.size());
-        assertEquals("A & A", result.get(0).getParticipant());
+        assertEquals("A & A", result.get(0).getParticipant().getPresentation());
     }
 
     @Test
@@ -108,8 +116,10 @@ public class ResultServiceTest {
         given(eventMock.findOne(id)).willReturn(mockedEvent);
 
         List<ProtocolEntity> protocols = new ArrayList<>();
-        ProtocolEntity protocol1 = createProtocolEntity(10L, mockedEvent, false, 25, "00:20", 0,"C");
-        ProtocolEntity protocol2 = createProtocolEntity(1L, mockedEvent, false, 25, "00:10", 0, "A");
+        ProtocolEntity protocol1 = createProtocolEntity(10L, mockedEvent, false, 25, "00:20",
+                0,1L, "C");
+        ProtocolEntity protocol2 = createProtocolEntity(1L, mockedEvent, false, 25, "00:10",
+                0, 2L, "A");
         protocols.add(protocol1);
         protocols.add(protocol2);
 
@@ -119,12 +129,12 @@ public class ResultServiceTest {
 
         List<? extends Result> result = unitUnderTest.getResults(id, "EVENT");
         assertEquals(2, result.size());
-        assertEquals("A & A", result.get(0).getParticipant());
+        assertEquals("A & A", result.get(0).getParticipant().getPresentation());
     }
 
     private ProtocolEntity createProtocolEntity(long id, EventEntity event, boolean sse,
                                                 int points, String timeStr, int errorPoints,
-                                                String participantStr) throws ParseException {
+                                                long participantId, String participantStr) throws ParseException {
         ProtocolEntity protocolEntity = new ProtocolEntity();
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
         Time time = new Time(sdf.parse(timeStr).getTime());
@@ -132,6 +142,7 @@ public class ResultServiceTest {
         protocolEntity.setSse(sse);
         protocolEntity.setPoints(points);
         ParticipantEntity participant = new ParticipantEntity();
+        participant.setId(participantId);
         participant.setOwner(participantStr);
         participant.setDog(participantStr);
         protocolEntity.setParticipant(participant);

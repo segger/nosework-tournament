@@ -7,7 +7,7 @@ public class EventResult extends Result {
     private int errorPoints;
     private boolean sse;
     private int tournamentPoints;
-    private String displayTournamentPoints;
+    private String tournamentPointsPresentation;
 
     public Time getTime() {
         return time;
@@ -41,11 +41,11 @@ public class EventResult extends Result {
         this.tournamentPoints = tournamentPoints;
     }
 
-    public String getDisplayTournamentPoints() {
-        return displayTournamentPoints;
+    public String getTournamentPointsPresentation() {
+        return tournamentPointsPresentation;
     }
 
-    public void setDisplayTournamentPoints(String displayTournamentPoints) {
-        this.displayTournamentPoints = displayTournamentPoints;
+    public void setTournamentPointsPresentation(String tournamentPointsPresentation) {
+        this.tournamentPointsPresentation = tournamentPointsPresentation;
     }
 }

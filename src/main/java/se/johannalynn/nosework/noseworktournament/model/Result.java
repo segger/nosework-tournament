@@ -2,7 +2,7 @@ package se.johannalynn.nosework.noseworktournament.model;
 
 public class Result {
     protected String placement;
-    protected String participant;
+    protected Participant participant;
     protected int points;
 
     public String getPlacement() {
@@ -13,11 +13,11 @@ public class Result {
         this.placement = placement;
     }
 
-    public String getParticipant() {
+    public Participant getParticipant() {
         return participant;
     }
 
-    public void setParticipant(String participant) {
+    public void setParticipant(Participant participant) {
         this.participant = participant;
     }
 
