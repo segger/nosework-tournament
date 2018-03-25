@@ -8,9 +8,13 @@ import se.johannalynn.nosework.noseworktournament.model.Result;
 import se.johannalynn.nosework.noseworktournament.model.ResultType;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ResultService {
+
+    @Autowired
+    TournamentRepository tournamentRepository;
 
     @Autowired
     EventRepository eventRepository;
@@ -24,41 +28,66 @@ public class ResultService {
                 return getEventResults(id);
             case CONTEST:
             case TOURNAMENT:
-                break;
+                return getTournamentResults(id);
         }
         throw new IllegalArgumentException();
     }
 
-    private List<? extends Result> getEventResults(long id) {
-        List<EventResult> resultList = new ArrayList<>();
-
+    // cache?
+    private List<EventResult> getEventResults(long id) {
         EventEntity event = eventRepository.findOne(id);
-        Iterator<ProtocolEntity> itr = protocolRepository.findByEvent(event).iterator();
-
-        while(itr.hasNext()) {
-            ProtocolEntity protocol = itr.next();
-            EventResult result = new EventResult();
-            result.setParticipant(parseParticipant(protocol.getParticipant()));
-            result.setPoints(protocol.getPoints());
-            result.setErrorPoints(protocol.getErrorPoints());
-            result.setSse(protocol.isSse());
-            result.setTime(protocol.getTime());
-            resultList.add(result);
-        }
-
-        Comparator<EventResult> resultComparator =
-                Comparator.comparingInt(EventResult::getPoints).reversed()
-                .thenComparing(EventResult::getErrorPoints)
-                .thenComparing(EventResult::getTime)
-                .thenComparingInt(EventResult::getErrorPoints);
-        Collections.sort(resultList, resultComparator);
-
-        PlacementCalculation calculation = new PlacementCalculation(10, resultList);
-        return calculation.asEventResultList();
+        List<ProtocolEntity> protocolList = protocolRepository.findByEvent(event);
+        protocolList = sort(protocolList);
+        EventResultMapper mapper = new EventResultMapper(protocolList, 10);
+        return mapper.asEventResultList();
     }
 
-    private String parseParticipant(ParticipantEntity participant) {
-        if(participant == null) return "";
-        return participant.getOwner() + " & " + participant.getDog();
+    private List<ProtocolEntity> sort(List<ProtocolEntity> resultList) {
+        Comparator<ProtocolEntity> resultComparator =
+                Comparator.comparingInt(ProtocolEntity::getPoints).reversed()
+                .thenComparing(ProtocolEntity::getErrorPoints)
+                .thenComparing(ProtocolEntity::getTime)
+                .thenComparing(ProtocolEntity::getErrorPoints);
+        Collections.sort(resultList, resultComparator);
+
+        return resultList;
+    }
+
+    private List<? extends Result> getTournamentResults(long id) {
+        List<Result> tournamentResultList = new ArrayList<>();
+        Map<Long, List<EventResult>> eventResultsByParticipant = new HashMap<>();
+        TournamentEntity tournament = tournamentRepository.findOne(id);
+        Iterator<ContestEntity> contestItr = tournament.getContests().iterator();
+        while(contestItr.hasNext()) {
+            ContestEntity contest = contestItr.next();
+            Iterator<EventEntity> eventItr = contest.getEvents().iterator();
+            while(eventItr.hasNext()) {
+                EventEntity event = eventItr.next();
+                List<EventResult> eventResults = getEventResults(event.getId());
+                for(EventResult eventResult : eventResults) {
+                    long participantId = eventResult.getParticipant().getId();
+                    List<EventResult> participantResults = eventResultsByParticipant.get(participantId);
+                    if(participantResults == null) participantResults = new ArrayList<>();
+                    participantResults.add(eventResult);
+                    eventResultsByParticipant.put(participantId, participantResults);
+                }
+            }
+        }
+
+        for(Map.Entry<Long, List<EventResult>> entry : eventResultsByParticipant.entrySet()) {
+            EventResult er = entry.getValue().get(0);
+            Result tournamentResult = new Result();
+            tournamentResult.setParticipant(er.getParticipant());
+            int tournamentPoints = entry.getValue().stream().mapToInt(EventResult::getTournamentPoints).sum();
+            tournamentResult.setPoints(tournamentPoints);
+            tournamentResultList.add(tournamentResult);
+        }
+
+        Collections.sort(tournamentResultList, Comparator.comparingInt(Result::getPoints).reversed());
+        int placement = 1;
+        for(Result tournamentResult : tournamentResultList) {
+            tournamentResult.setPlacement(""+placement++);
+        }
+        return tournamentResultList;
     }
 }
