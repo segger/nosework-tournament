@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: @spring.profile.active@
   jpa:
     hibernate:
       ddl-auto: create
