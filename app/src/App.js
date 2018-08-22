@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Table } from 'react-bootstrap';
+import TournamentList from './tournament/TournamentList';
 
 class App extends Component {
     state = {
@@ -13,29 +15,47 @@ class App extends Component {
         const body = await response.json();
         console.log(body._embedded.tournaments);
         const list = body._embedded.tournaments;
-        this.setState({ tournaments: list, isLoading: false });
+        this.setState({tournaments: list, isLoading: false});
     }
 
-  render() {
-        const { tournaments, isLoading } = this.state;
+    render() {
+        const {tournaments, isLoading} = this.state;
 
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <div className="App-intro">
-          <h2>List of tournaments</h2>
-            { tournaments.map (tournament =>
-                <div key={tournament.name}>
-                    {tournament.name}
+        if (isLoading) {
+            return <p>Loading...</p>
+        }
+
+        return (
+            <div className="App">
+                <div className="App-intro">
+                    <h2>List of tournaments</h2>
+                    {tournaments.map(tournament =>
+                        <div key={tournament.name}>
+                            {tournament.name}
+                        </div>
+                    )}
                 </div>
-            )}
-        </div>
-      </div>
-    );
-  }
+
+                <TournamentList />
+
+                <Table striped bordered condensed hover>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Namn</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Sommarsniffen</td>
+                    </tr>
+                    </tbody>
+                </Table>
+
+            </div>
+        );
+    }
 }
 
 export default App;
