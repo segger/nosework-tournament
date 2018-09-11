@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
+import { Table } from 'reactstrap';
 
 class TournamentList extends Component {
     constructor(props) {
@@ -34,24 +34,19 @@ class TournamentList extends Component {
         });
 
         return (
-               <div>
-                   <Container fluid>
-                       <div className="float-right">
-                           ADD
-                       </div>
-                       <h3>Tournaments</h3>
-                       <Table className="mt-4">
-                           <thead>
-                           <tr>
-                               <th>Namn</th>
-                               <th width="10%">Actions</th>
-                           </tr>
-                           </thead>
-                           <tbody>
-                           {tournamentList}
-                           </tbody>
-                       </Table>
-                   </Container>
+               <div className="TournamentList">
+                   <h3>Tuneringar</h3>
+                   <Table striped bordered className="mt-4">
+                       <thead>
+                       <tr>
+                           <th>Namn</th>
+                           <th width="10%"></th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       {tournamentList}
+                       </tbody>
+                   </Table>
                </div>
         );
     }
