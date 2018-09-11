@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import TournamentList from './tournament/TournamentList';
 import Menu from './menu/Menu';
+import MainRouter from './router/MainRouter';
 
 class App extends Component {
     state = {
@@ -24,7 +24,7 @@ class App extends Component {
                 </div>
                 <Menu />
 
-                <TournamentList />
+                <MainRouter />
             </div>
         );
     }
