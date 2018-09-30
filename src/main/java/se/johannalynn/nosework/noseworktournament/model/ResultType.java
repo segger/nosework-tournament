@@ -1,7 +1,5 @@
 package se.johannalynn.nosework.noseworktournament.model;
 
-import java.util.Arrays;
-
 public enum ResultType {
     TOURNAMENT, CONTEST, EVENT;
 

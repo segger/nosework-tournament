@@ -9,7 +9,14 @@ class ResultList extends Component {
 
     componentDidMount() {
         console.log('ResultList - componentDidMount');
-        this.setState({isLoading: false});
+        this.setState({isLoading: true});
+
+        fetch('/api/results/1?type=tournament')
+            .then(response => response.json())
+            .then(data => this.setState({
+                results: data,
+                isLoading: false
+            }));
     }
 
     render() {
@@ -19,20 +26,29 @@ class ResultList extends Component {
             return <p>Loading</p>
         }
 
+        const resultList = results.map(result => {
+            return (
+                <tr key={result.id}>
+                    <td>{result.placement}</td>
+                    <td>{result.participant.presentation}</td>
+                    <td>{result.points}</td>
+                </tr>
+            )
+        });
+
         return (
                <div className="TournamentList">
                    <h3>Resultat</h3>
                    <Table striped bordered className="mt-4">
                        <thead>
                        <tr>
-                           <th>Namn</th>
-                           <th width="10%"></th>
+                           <th>Placering</th>
+                           <th>Ekipage</th>
+                           <th>Poäng</th>
                        </tr>
                        </thead>
                        <tbody>
-                       <tr><td colSpan={2}>
-                        Inga resultat ännu.
-                       </td></tr>
+                       {resultList}
                        </tbody>
                    </Table>
                </div>

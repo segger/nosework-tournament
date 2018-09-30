@@ -8,6 +8,7 @@ import se.johannalynn.nosework.noseworktournament.service.ResultService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class ResultController {
 
     @Autowired

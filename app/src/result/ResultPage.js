@@ -10,7 +10,6 @@ class ResultPage extends Component {
     render() {
         return (
             <div>
-                <ResultForm />
                 <ResultList />
             </div>
         );

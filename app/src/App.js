@@ -22,6 +22,7 @@ class App extends Component {
                         <span>by segger</span>
                     </div>
                 </div>
+
                 <Menu />
 
                 <MainRouter />
