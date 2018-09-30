@@ -1,12 +1,12 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import ResultPage from '../result/ResultPage';
-import TournamentList from '../tournament/TournamentList';
+import TournamentPage from '../tournament/TournamentPage';
 
 const MainRouter = () => (
     <Switch>
         <Route exact path='/' component={ResultPage}/>
-        <Route path='/tournaments' component={TournamentList}/>
+        <Route path='/tournaments' component={TournamentPage}/>
     </Switch>
 )
 

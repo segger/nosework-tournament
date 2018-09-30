@@ -77,6 +77,7 @@ public class ResultService {
         for(Map.Entry<Long, List<EventResult>> entry : eventResultsByParticipant.entrySet()) {
             EventResult er = entry.getValue().get(0);
             Result tournamentResult = new Result();
+            tournamentResult.setId(er.hashCode());
             tournamentResult.setParticipant(er.getParticipant());
             int tournamentPoints = entry.getValue().stream().mapToInt(EventResult::getTournamentPoints).sum();
             tournamentResult.setPoints(tournamentPoints);

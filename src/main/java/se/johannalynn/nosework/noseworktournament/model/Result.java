@@ -1,9 +1,18 @@
 package se.johannalynn.nosework.noseworktournament.model;
 
 public class Result {
+    protected long id;
     protected String placement;
     protected Participant participant;
     protected int points;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getPlacement() {
         return placement;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Col, Input, Button } from 'reactstrap';
+import {
+    UncontrolledCollapse,
+    Form, FormGroup, Label, Col, Input, Button } from 'reactstrap';
 
 class ResultForm extends Component {
     constructor(props) {
@@ -42,23 +44,30 @@ class ResultForm extends Component {
         });
 
         return (
+            <div>
+                <Button color="primary" id="toggler" block>
+                Lägg till
+                </Button>
 
-            <Form>
-                <FormGroup row>
-                    <Label for="participant" sm={2}>Deltagare</Label>
-                    <Col sm={10}>
-                        <Input type="text" name="participant" id="participant" placeholder="Deltagare"/>
-                    </Col>
-                </FormGroup>
+                <UncontrolledCollapse toggler="#toggler">
+                <Form>
+                    <FormGroup row>
+                        <Label for="participant" sm={2}>Deltagare</Label>
+                        <Col sm={10}>
+                            <Input type="text" name="participant" id="participant" placeholder="Deltagare"/>
+                        </Col>
+                    </FormGroup>
 
-                {protocol}
+                    {protocol}
 
-                <FormGroup check row>
-                    <Col sm={{size: 10, offset: 2}}>
-                        <Button>Spara</Button>
-                    </Col>
-                </FormGroup>
-            </Form>
+                    <FormGroup check row>
+                        <Col sm={{size: 10, offset: 2}}>
+                            <Button>Spara</Button>
+                        </Col>
+                    </FormGroup>
+                </Form>
+                </UncontrolledCollapse>
+            </div>
         );
     }
 }

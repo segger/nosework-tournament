@@ -17,13 +17,8 @@ class App extends Component {
         return (
             <div className="App">
                 <div className="App-header">
-                    <div className="App-intro">
-                        <div className="App-title">Nosework Tournament App</div>
-                        <span>by segger</span>
-                    </div>
+                    <Menu />
                 </div>
-
-                <Menu />
 
                 <MainRouter />
             </div>

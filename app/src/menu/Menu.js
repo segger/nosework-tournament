@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarBrand, NavbarToggler, Nav, NavItem, NavLink } from 'reactstrap';
 
 class Menu extends Component {
     constructor(props) {
@@ -20,6 +20,9 @@ class Menu extends Component {
         return (
             <div>
                 <Navbar color="faded" light>
+                    <NavbarBrand href="/" className="mr-auto">
+                        <img src="placeholder-icon.png"/>
+                    </NavbarBrand>
                     <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!this.state.collapsed} navbar>
                         <Nav navbar>

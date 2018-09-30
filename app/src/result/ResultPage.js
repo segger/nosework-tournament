@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ResultNavigation from "./ResultNavigation";
 import ResultForm from "./ResultForm";
 import ResultList from "./ResultList";
 
@@ -9,7 +10,10 @@ class ResultPage extends Component {
 
     render() {
         return (
-            <div>
+            <div className="Page">
+                <h3 className="Page-header">Resultat</h3>
+                <ResultNavigation />
+                <ResultForm />
                 <ResultList />
             </div>
         );

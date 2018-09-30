@@ -34,8 +34,7 @@ class TournamentList extends Component {
         });
 
         return (
-               <div className="TournamentList">
-                   <h3>Tuneringar</h3>
+               <div className="TournamentList StripedList">
                    <Table striped bordered className="mt-4">
                        <thead>
                        <tr>
