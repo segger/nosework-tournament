@@ -21,7 +21,7 @@ class Menu extends Component {
             <div>
                 <Navbar color="faded" light>
                     <NavbarBrand href="/" className="mr-auto">
-                        <img src="placeholder-icon.png"/>
+                        <img src="placeholder-icon.png" alt=""/>
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!this.state.collapsed} navbar>

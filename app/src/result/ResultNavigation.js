@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class ResultNavigation extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         console.log('ResultNavigation - componentDidMount');
