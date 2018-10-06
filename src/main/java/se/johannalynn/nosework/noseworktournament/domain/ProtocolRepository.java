@@ -11,4 +11,5 @@ import java.util.List;
 public interface ProtocolRepository extends CrudRepository<ProtocolEntity, Long> {
 
     List<ProtocolEntity> findByEvent(EventEntity event);
+
 }

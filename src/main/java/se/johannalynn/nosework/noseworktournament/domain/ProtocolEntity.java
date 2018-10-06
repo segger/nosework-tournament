@@ -1,5 +1,9 @@
 package se.johannalynn.nosework.noseworktournament.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import se.johannalynn.nosework.noseworktournament.util.SqlTimeDeserializer;
+
 import javax.persistence.*;
 import java.sql.Time;
 
@@ -14,6 +18,8 @@ public class ProtocolEntity {
     private Long id;
 
     @Column
+    @JsonFormat(pattern = "mm:ss")
+    @JsonDeserialize(using = SqlTimeDeserializer.class)
     private Time time;
 
     @Column

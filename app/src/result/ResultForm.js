@@ -4,12 +4,17 @@ import {
     UncontrolledCollapse, Collapse,
     Form, FormGroup, Label, Col, Input, Button } from 'reactstrap';
 import './ResultForm.css';
+import EventProtocolForm from "./EventProtocolForm";
 
 class ResultForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            formData: {
+                participant: '',
+                protocols: new Map()
+            },
             events: []
         };
     }
@@ -35,7 +40,7 @@ class ResultForm extends Component {
 
     transform = (item) => {
         return {
-            id: item.name + Math.random().toString(36).substr(2, 9),
+            id: '_' + Math.random().toString(36).substr(2, 9),
             name: item.name,
             type: item.type,
             maxTime: item.maxTime,
@@ -60,6 +65,41 @@ class ResultForm extends Component {
         });
     };
 
+    onUpdateProtocol = (protocol) => {
+        let id = protocol.id;
+        let protocolList = this.state.formData.protocols;
+        protocolList.set(id, protocol);
+
+        this.setState({
+            formData: {
+                ...this.state.formData,
+                protocols: protocolList
+            }
+        });
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        let protocolList = [];
+        this.state.formData.protocols.forEach(item => {
+            let protocol = {
+                time: item.timeMin + ":" + item.timeSec,
+                sse: item.sse,
+                errorPoints: item.errorPoints
+            };
+            protocolList.push(protocol);
+        });
+
+        fetch('/api/protocols/list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(protocolList)
+        });
+    };
+
     render() {
         const { events } = this.state;
 
@@ -70,50 +110,7 @@ class ResultForm extends Component {
                     <span className="event-header-name">{event.name}</span> <span className="event-header-maxTime">{event.maxTime}</span>
                 </Button>
                 <Collapse isOpen={event.collapsed}>
-                    <FormGroup row className="time-row">
-                        <Col className="form-col">
-                            <Label className="form-label">Tid</Label>
-                        </Col>
-                        <Col className="time-input">
-                            <Input type="number" name="timeMin" id="timeMin" placeholder="00" className="time-input"/>:
-                            <Input type="number" name="timeSec" id="timeSec" placeholder="00" className="time-input"/>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup row>
-                        <Col className="form-col">
-                            <Label className="stash-label">Fönster</Label>
-                            <div className="points-label">(25p)</div>
-                        </Col>
-                        <Col>
-                            <Input type="checkbox" />
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup row>
-                        <Col className="form-col">
-                            <Label className="form-label">Felpoäng</Label>
-                        </Col>
-                        <Col>
-                            <Input type="number" name="errorPoints" id="errorPoints" placeholder="0"/>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup row>
-                        <Col className="form-col">
-                            <Label>SSE</Label>
-                        </Col>
-                        <Col>
-                            <Input type="checkbox" />
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup row>
-                        <Label for="comment" sm={1}>Kommentar</Label>
-                        <Col sm={10}>
-                            <Input type="textarea" name="comment" id="comment"/>
-                        </Col>
-                    </FormGroup>
+                    <EventProtocolForm {...event} updateProtocol={this.onUpdateProtocol}/>
                 </Collapse>
                 </div>
             );
@@ -126,11 +123,22 @@ class ResultForm extends Component {
                 </Button>
 
                 <UncontrolledCollapse toggler="#mainToggler">
-                <Form>
+                <Form onSubmit={this.handleSubmit}>
                     <FormGroup row>
                         <Label for="participant" sm={2}>Deltagare</Label>
                         <Col sm={10}>
-                            <Input type="text" name="participant" id="participant" placeholder="Deltagare"/>
+                            <Input
+                                type="text"
+                                name="participant"
+                                id="participant"
+                                placeholder="Deltagare"
+                                value={this.state.formData.participant}
+                                onChange={(e) => this.setState({
+                                    formData: {
+                                        ...this.state.formData,
+                                        participant: e.target.value
+                                    }
+                                })} />
                         </Col>
                     </FormGroup>
 
