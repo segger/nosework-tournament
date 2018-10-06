@@ -19,7 +19,7 @@ class Menu extends Component {
     render() {
         return (
             <div>
-                <Navbar color="faded" light>
+                <Navbar color="faded" dark>
                     <NavbarBrand href="/" className="mr-auto">
                         <img src="placeholder-icon.png" alt=""/>
                     </NavbarBrand>

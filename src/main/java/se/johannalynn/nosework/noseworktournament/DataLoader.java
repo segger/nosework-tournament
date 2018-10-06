@@ -28,6 +28,8 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws ParseException {
         TournamentEntity tournament = new TournamentEntity();
         tournament.setName("Tournament1");
+        tournament.setLevel(EventLevel.ONE);
+
         Set<ContestEntity> contests = new HashSet<>();
         ContestEntity contest = new ContestEntity();
         contest.setName("Contest1");
@@ -35,23 +37,43 @@ public class DataLoader implements ApplicationRunner {
         Date contestDate = new Date(dateFormat.parse("2018-01-01").getTime());
         contest.setDate(contestDate);
         contest.setTournament(tournament);
+
         Set<EventEntity> events = new HashSet<>();
         EventEntity event = new EventEntity();
         event.setContest(contest);
-        event.setLevel(EventLevel.ONE);
         event.setName("Event1");
+        event.setContestOrder(1);
         SimpleDateFormat timeFormat = new SimpleDateFormat("mm:ss");
         Time maxTime = new Time(timeFormat.parse("01:30").getTime());
         event.setMaxTime(maxTime);
         event.setType(EventType.CONTAINERS);
+
+        EventEntity event2 = new EventEntity();
+        event2.setContest(contest);
+        event2.setName("Event2");
+        event2.setContestOrder(2);
+        Time maxTime2 = new Time(timeFormat.parse("02:30").getTime());
+        event2.setMaxTime(maxTime2);
+        event2.setType(EventType.VEHICLES);
+
         Set<StashEntity> stashes = new HashSet<>();
         StashEntity stash = new StashEntity();
         stash.setEvent(event);
         stash.setName("Stash1");
         stash.setPoints(25);
         stashes.add(stash);
+
+        Set<StashEntity> stashes2 = new HashSet<>();
+        StashEntity stash2 = new StashEntity();
+        stash2.setEvent(event2);
+        stash2.setName("Stash2");
+        stash2.setPoints(25);
+        stashes2.add(stash2);
+
         event.setStashes(stashes);
+        event2.setStashes(stashes2);
         events.add(event);
+        events.add(event2);
         contest.setEvents(events);
         contests.add(contest);
         tournament.setContests(contests);

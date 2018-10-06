@@ -23,11 +23,10 @@ public class EventEntity {
     private EventType type;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private EventLevel level;
+    private Time maxTime;
 
     @Column
-    private Time maxTime;
+    private int contestOrder;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contest")
@@ -60,14 +59,6 @@ public class EventEntity {
         this.type = type;
     }
 
-    public EventLevel getLevel() {
-        return level;
-    }
-
-    public void setLevel(EventLevel level) {
-        this.level = level;
-    }
-
     public Time getMaxTime() {
         return maxTime;
     }
@@ -90,5 +81,13 @@ public class EventEntity {
 
     public void setStashes(Set<StashEntity> stashes) {
         this.stashes = stashes;
+    }
+
+    public int getContestOrder() {
+        return contestOrder;
+    }
+
+    public void setContestOrder(int contestOrder) {
+        this.contestOrder = contestOrder;
     }
 }

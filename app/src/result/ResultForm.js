@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import {
     UncontrolledCollapse, Collapse,
     Form, FormGroup, Label, Col, Input, Button } from 'reactstrap';
+import './ResultForm.css';
 
 class ResultForm extends Component {
     constructor(props) {
@@ -14,23 +16,42 @@ class ResultForm extends Component {
     componentDidMount() {
         console.log('ResultForm - componentDidMount');
 
-        const mockEvents = [{"id":0, "name": "one", "collapsed": false}, {"id":1, "name": "one1", "collapsed": false}];
-        this.setState({
-            events: mockEvents
-        })
+        fetch('/api/contests/1/events')
+            .then(response => response.json())
+            .then(data => {
+                let events = [];
+                data._embedded.events.forEach(item => {
+                    let event = this.transform(item);
+                    events.push(event);
+                });
+
+                events.sort((a, b) => { return a.order - b.order });
+
+                this.setState({
+                    events: events
+                });
+            });
     }
 
+    transform = (item) => {
+        return {
+            id: item.name + Math.random().toString(36).substr(2, 9),
+            name: item.name,
+            order: item.contestOrder,
+            collapsed: false
+        }
+    };
+
     onClickEvent = (id) => {
-        console.log('onClickEvent: ' + id);
         let collapsedEvents = this.state.events;
 
-        for(let i = 0; i < collapsedEvents.length; i++) {
-            if(i === id) {
-                collapsedEvents[i].collapsed = !collapsedEvents[i].collapsed;
+        collapsedEvents.forEach(item => {
+            if(item.id === id) {
+                item.collapsed = !item.collapsed;
             } else {
-                collapsedEvents[i].collapsed = false;
+                item.collapsed = false;
             }
-        }
+        });
 
         this.setState({
             events: collapsedEvents
@@ -43,26 +64,51 @@ class ResultForm extends Component {
         const protocol = events.map(event => {
             return (
                 <div key={event.id}>
-                <Button color="secondary" onClick={(id) => this.onClickEvent(event.id)} block>Sök {event.id}</Button>
+                <Button color="secondary" onClick={(id) => this.onClickEvent(event.id)} block>{event.name}</Button>
                 <Collapse isOpen={event.collapsed}>
+                    <FormGroup row className="time-row">
+                        <Col className="form-col">
+                            <Label className="form-label">Tid</Label>
+                        </Col>
+                        <Col className="time-input">
+                            <Input type="number" name="timeMin" id="timeMin" placeholder="00" className="time-input"/>:
+                            <Input type="number" name="timeSec" id="timeSec" placeholder="00" className="time-input"/>
+                        </Col>
+                    </FormGroup>
+
                     <FormGroup row>
-                        <Label for="comment" sm={2}>Kommentar</Label>
+                        <Col className="form-col">
+                            <Label className="stash-label">Fönster</Label>
+                            <div className="points-label">(25p)</div>
+                        </Col>
+                        <Col>
+                            <Input type="checkbox" />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                        <Col className="form-col">
+                            <Label className="form-label">Felpoäng</Label>
+                        </Col>
+                        <Col>
+                            <Input type="number" name="errorPoints" id="errorPoints" placeholder="0"/>
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                        <Col className="form-col">
+                            <Label>SSE</Label>
+                        </Col>
+                        <Col>
+                            <Input type="checkbox" />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                        <Label for="comment" sm={1}>Kommentar</Label>
                         <Col sm={10}>
                             <Input type="textarea" name="comment" id="comment"/>
                         </Col>
-                    </FormGroup>
-
-                    <FormGroup row>
-                        <Label for="time" sm={2}>Tid</Label>
-                        <Col sm={10}>
-                            <Input type="time" name="time" id="time" placeholder="00:00" />
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup check inline>
-                        <Label check>
-                            <Input type="checkbox" /> SSE
-                        </Label>
                     </FormGroup>
                 </Collapse>
                 </div>
@@ -86,9 +132,9 @@ class ResultForm extends Component {
 
                     {protocol}
 
-                    <FormGroup check row>
-                        <Col sm={{size: 10, offset: 2}}>
-                            <Button>Spara</Button>
+                    <FormGroup row>
+                        <Col>
+                            <Button color="success" block>Spara</Button>
                         </Col>
                     </FormGroup>
                 </Form>

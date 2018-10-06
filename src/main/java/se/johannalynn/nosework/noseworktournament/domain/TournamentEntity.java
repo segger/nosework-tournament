@@ -14,6 +14,10 @@ public class TournamentEntity {
     @Column
     private String name;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private EventLevel level;
+
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ContestEntity> contests;
 
@@ -39,6 +43,14 @@ public class TournamentEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public EventLevel getLevel() {
+        return level;
+    }
+
+    public void setLevel(EventLevel level) {
+        this.level = level;
     }
 
     public Set<ContestEntity> getContests() {
