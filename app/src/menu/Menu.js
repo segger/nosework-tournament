@@ -27,10 +27,7 @@ class Menu extends Component {
                     <Collapse isOpen={!this.state.collapsed} navbar>
                         <Nav navbar>
                             <NavItem>
-                                <NavLink href="/">Resultat</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="/tournaments">Tuneringar</NavLink>
+                                <NavLink href="/result">Resultat</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

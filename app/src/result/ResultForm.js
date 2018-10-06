@@ -37,6 +37,8 @@ class ResultForm extends Component {
         return {
             id: item.name + Math.random().toString(36).substr(2, 9),
             name: item.name,
+            type: item.type,
+            maxTime: item.maxTime,
             order: item.contestOrder,
             collapsed: false
         }
@@ -64,7 +66,9 @@ class ResultForm extends Component {
         const protocol = events.map(event => {
             return (
                 <div key={event.id}>
-                <Button color="secondary" onClick={(id) => this.onClickEvent(event.id)} block>{event.name}</Button>
+                <Button color="secondary" onClick={(id) => this.onClickEvent(event.id)} block>
+                    <span className="event-header-name">{event.name}</span> <span className="event-header-maxTime">{event.maxTime}</span>
+                </Button>
                 <Collapse isOpen={event.collapsed}>
                     <FormGroup row className="time-row">
                         <Col className="form-col">
