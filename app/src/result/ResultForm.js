@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 import {
-    UncontrolledCollapse, Collapse,
-    Form, FormGroup, Label, Col, Input, Button } from 'reactstrap';
+    Collapse, Form, FormGroup, Label, Col, Input, Button } from 'reactstrap';
 import './ResultForm.css';
 import EventProtocolForm from "./EventProtocolForm";
 
@@ -15,7 +14,8 @@ class ResultForm extends Component {
                 participant: '',
                 protocols: new Map()
             },
-            events: []
+            events: [],
+            formOpen: false
         };
     }
     componentDidMount() {
@@ -49,6 +49,12 @@ class ResultForm extends Component {
         }
     };
 
+    toggleForm = () => {
+        this.setState({
+            formOpen: !this.state.formOpen
+        })
+    };
+
     onClickEvent = (id) => {
         let collapsedEvents = this.state.events;
 
@@ -80,6 +86,7 @@ class ResultForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        this.toggleForm();
 
         let protocolList = [];
         this.state.formData.protocols.forEach(item => {
@@ -118,11 +125,11 @@ class ResultForm extends Component {
 
         return (
             <div>
-                <Button color="primary" id="mainToggler" block>
+                <Button color="primary" onClick={this.toggleForm} block>
                 Lägg till
                 </Button>
 
-                <UncontrolledCollapse toggler="#mainToggler">
+                <Collapse isOpen={this.state.formOpen}>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup row>
                         <Label for="participant" sm={2}>Deltagare</Label>
@@ -150,7 +157,7 @@ class ResultForm extends Component {
                         </Col>
                     </FormGroup>
                 </Form>
-                </UncontrolledCollapse>
+                </Collapse>
             </div>
         );
     }
