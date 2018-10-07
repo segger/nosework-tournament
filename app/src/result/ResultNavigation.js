@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import ResultDropdown from '../components/dropdown/ResultDropdown';
 
 class ResultNavigation extends Component {
     constructor(props) {
         super(props);
 
+        let route = '/results/' + props.tournamentId;
+
         this.state = {
             tournamentId: props.tournamentId,
-            tournament: {}
+            tournament: {},
+            route: route
         };
     }
 
@@ -15,6 +19,7 @@ class ResultNavigation extends Component {
         console.log('ResultNavigation - componentDidMount ' + this.state.tournamentId);
 
         let url = '/api/tournaments/' + this.state.tournamentId;
+
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -29,12 +34,13 @@ class ResultNavigation extends Component {
     }
 
     render() {
-        const { tournament } = this.state;
+        const { tournament, route } = this.state;
 
         return (
             <div className="tournamentNavigation">
                 <Breadcrumb tag="nav">
-                    <BreadcrumbItem active tag="a" href="#"> { tournament.name }</BreadcrumbItem>
+                    <BreadcrumbItem className="button-align" active tag="a" href={route}> { tournament.name }</BreadcrumbItem>
+                    <BreadcrumbItem ><ResultDropdown /></BreadcrumbItem>
                 </Breadcrumb>
             </div>
         )

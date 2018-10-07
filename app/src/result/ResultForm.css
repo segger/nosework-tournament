@@ -40,3 +40,7 @@ input[type=checkbox]
     -o-transform: scale(2); /* Opera */
     padding: 10px;
 }
+
+.button-align {
+    margin-top: 0.5rem;
+}
