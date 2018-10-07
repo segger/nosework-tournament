@@ -5,7 +5,7 @@ import TournamentPage from '../tournament/TournamentPage';
 
 const MainRouter = () => (
     <Switch>
-        <Route exact path="/" component={ResultPage}/>
+        <Route exact path="/" component={TournamentPage}/>
         <Route path="/result" component={ResultPage}/>
         <Route path="/tournaments" component={TournamentPage}/>
     </Switch>

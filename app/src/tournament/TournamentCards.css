@@ -1,0 +1,25 @@
+.TournamentCard {
+    margin: 1rem;
+}
+
+.tournamentTitle {
+    margin-bottom: 0;
+}
+
+.tournamentName {
+    font-weight: bold;
+}
+
+.tournamentLevel {
+    float: right;
+}
+
+.TournamentCard.default {
+    background-color: #660066;
+    border-color: #660066;
+}
+
+.TournamentCard.red {
+    background-color: red;
+    border-color: red;
+}

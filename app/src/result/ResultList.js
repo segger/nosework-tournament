@@ -4,7 +4,13 @@ import { Table } from 'reactstrap';
 class ResultList extends Component {
     constructor(props) {
         super(props);
-        this.state = { results: [], isLoading: true };
+
+        console.log(props);
+
+        this.state = {
+            results: [],
+            isLoading: true
+        };
     }
 
     componentDidMount() {

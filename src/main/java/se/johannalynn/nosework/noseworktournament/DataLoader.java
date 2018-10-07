@@ -26,6 +26,10 @@ public class DataLoader implements ApplicationRunner {
     private ProtocolRepository protocolRepository;
 
     public void run(ApplicationArguments args) throws ParseException {
+        TournamentEntity tournament2 = new TournamentEntity();
+        tournament2.setName("Tournament2");
+        tournament2.setLevel(EventLevel.ONE);
+
         TournamentEntity tournament = new TournamentEntity();
         tournament.setName("Tournament1");
         tournament.setLevel(EventLevel.ONE);
@@ -112,6 +116,7 @@ public class DataLoader implements ApplicationRunner {
 
         tournamentRepository.save(tournament);
 
+        tournamentRepository.save(tournament2);
     }
 
     private ParticipantEntity createParticipant(String owner, String dog, TournamentEntity tournament) {

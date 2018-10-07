@@ -26,9 +26,7 @@ class TournamentList extends Component {
             return (
                 <tr key={tournament.name}>
                     <td>{tournament.name}</td>
-                    <td>
-                        EDIT
-                    </td>
+                    <td>{tournament.level}</td>
                 </tr>
             )
         });
@@ -39,7 +37,7 @@ class TournamentList extends Component {
                        <thead>
                        <tr>
                            <th>Namn</th>
-                           <th width="10%"></th>
+                           <th>Klass</th>
                        </tr>
                        </thead>
                        <tbody>
