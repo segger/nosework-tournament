@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Card, CardTitle } from 'reactstrap';
 
 import './TournamentCards.css';
@@ -40,7 +41,7 @@ class TournamentCards extends Component {
 
     transform = (item) => {
         return {
-            id: '_' + Math.random().toString(36).substr(2, 9),
+            id: item.id,
             name: item.name,
             level: this.transformLevel(item.level),
             color: item.color === undefined ? 'default' : item.color,
@@ -49,9 +50,8 @@ class TournamentCards extends Component {
     };
 
     selectTournament = (id) => {
-        console.log('select id: ' + id);
-        let tournament = this.state.tournaments.find((item) => { return item.id === id; });
-        console.log('tournamentlink: ' + tournament.link);
+        //let tournament = this.state.tournaments.find((item) => { return item.id === id; });
+        this.props.history.push("/results/" + id);
     };
 
     render() {
@@ -78,4 +78,4 @@ class TournamentCards extends Component {
     }
 }
 
-export default TournamentCards;
+export default withRouter(TournamentCards);

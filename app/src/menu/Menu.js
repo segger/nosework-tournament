@@ -21,13 +21,13 @@ class Menu extends Component {
             <div>
                 <Navbar color="faded" dark>
                     <NavbarBrand href="/" className="mr-auto">
-                        <img src="placeholder-icon.png" alt=""/>
+                        <img src="/placeholder-icon.png" alt=""/>
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!this.state.collapsed} navbar>
                         <Nav navbar>
                             <NavItem>
-                                <NavLink href="/result">Resultat</NavLink>
+                                <NavLink href="/results">Tuneringar</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

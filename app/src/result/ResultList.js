@@ -5,11 +5,10 @@ class ResultList extends Component {
     constructor(props) {
         super(props);
 
-        console.log(props);
-
         this.state = {
             results: [],
-            isLoading: true
+            isLoading: true,
+            tournamentId: props.tournamentId
         };
     }
 
@@ -17,7 +16,8 @@ class ResultList extends Component {
         console.log('ResultList - componentDidMount');
         this.setState({isLoading: true});
 
-        fetch('/api/results/1?type=tournament')
+        let url = '/api/results/' + this.state.tournamentId + '?type=tournament';
+        fetch(url)
             .then(response => response.json())
             .then(data => this.setState({
                 results: data,
