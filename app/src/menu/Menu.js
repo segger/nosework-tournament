@@ -16,6 +16,7 @@ class Menu extends Component {
             collapsed: !this.state.collapsed
         });
     }
+
     render() {
         return (
             <div>

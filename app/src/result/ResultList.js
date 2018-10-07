@@ -13,7 +13,7 @@ class ResultList extends Component {
     }
 
     componentDidMount() {
-        console.log('ResultList - componentDidMount');
+        console.log('ResultList - componentDidMount ' + this.state.tournamentId);
         this.setState({isLoading: true});
 
         let url = '/api/results/' + this.state.tournamentId + '?type=tournament';

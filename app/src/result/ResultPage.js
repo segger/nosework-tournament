@@ -7,10 +7,11 @@ class ResultPage extends Component {
     constructor(props) {
         super(props);
 
-        console.log('path id: ' + JSON.stringify(props.match.params.id));
+        console.log('ResultPage.match.params.id: ' + JSON.stringify(props.match.params.id));
 
         this.state = {
-            tournamentId: props.match.params.id
+            id: props.match.params.id,
+            showForm: false
         }
     }
 
@@ -19,12 +20,16 @@ class ResultPage extends Component {
     }
 
     render() {
+        const { showForm } = this.state;
+
         return (
             <div className="Page">
                 <h3 className="Page-header">Resultat</h3>
-                <ResultNavigation />
-                <ResultForm tournamentId={this.state.tournamentId} />
-                <ResultList tournamentId={this.state.tournamentId} />
+                <ResultNavigation tournamentId={this.state.id} />
+                { showForm &&
+                    <ResultForm tournamentId={this.state.id} />
+                }
+                <ResultList tournamentId={this.state.id} />
             </div>
         );
     }
