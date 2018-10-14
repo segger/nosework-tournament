@@ -51,7 +51,7 @@ class TournamentCards extends Component {
 
     selectTournament = (id) => {
         //let tournament = this.state.tournaments.find((item) => { return item.id === id; });
-        this.props.history.push("/results/" + id);
+        this.props.history.push("/results/" + id + "?type=tournament");
     };
 
     render() {

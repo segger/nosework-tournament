@@ -6,12 +6,13 @@ class ResultNavigation extends Component {
     constructor(props) {
         super(props);
 
-        let route = '/results/' + props.tournamentId;
+        let resultRoute = '/results/' + props.tournamentId + '?type=';
+        // let type = props.type;
 
         this.state = {
             tournamentId: props.tournamentId,
             tournament: {},
-            route: route
+            route: resultRoute
         };
     }
 
@@ -23,14 +24,11 @@ class ResultNavigation extends Component {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                    console.log('tournament: ' + JSON.stringify(data));
                     this.setState({
                         tournament: data
                     });
                 }
-            ).catch(() => {
-                console.log('failure');
-            });
+            );
     }
 
     render() {
@@ -39,8 +37,10 @@ class ResultNavigation extends Component {
         return (
             <div className="tournamentNavigation">
                 <Breadcrumb tag="nav">
-                    <BreadcrumbItem className="button-align" active tag="a" href={route}> { tournament.name }</BreadcrumbItem>
-                    <BreadcrumbItem ><ResultDropdown /></BreadcrumbItem>
+                    <BreadcrumbItem className="button-align" active tag="a" href={route + "tournament"}> { tournament.name }</BreadcrumbItem>
+                    <BreadcrumbItem>
+                        <ResultDropdown data={tournament} />
+                    </BreadcrumbItem>
                 </Breadcrumb>
             </div>
         )

@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class ResultDropdown extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+    
     componentDidMount() {
         console.log('ResultDropdown - componentDidMount');
     }
