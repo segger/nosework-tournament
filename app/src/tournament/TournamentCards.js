@@ -65,7 +65,7 @@ class TournamentCards extends Component {
                     <CardTitle className="tournamentTitle">
                         <span className="tournamentName">{tournament.name}</span>
                         <span className="tournamentLevel">Klass {tournament.level}</span>
-                        </CardTitle>
+                    </CardTitle>
                 </Card>
             );
         });

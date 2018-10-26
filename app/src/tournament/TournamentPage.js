@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TournamentCards from "./TournamentCards";
 
 class TournamentPage extends Component {
     componentDidMount() {
@@ -10,7 +9,6 @@ class TournamentPage extends Component {
         return (
             <div className="Page">
                 <h3 className="Page-header">Tuneringar</h3>
-                <TournamentCards/>
             </div>
         );
     }
