@@ -27,16 +27,16 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) throws ParseException {
         TournamentEntity tournament2 = new TournamentEntity();
-        tournament2.setName("Tournament2");
+        tournament2.setName("Spöksniffen");
         tournament2.setLevel(EventLevel.ONE);
 
         TournamentEntity tournament = new TournamentEntity();
-        tournament.setName("Tournament1");
+        tournament.setName("Adventssniffen");
         tournament.setLevel(EventLevel.ONE);
 
         Set<ContestEntity> contests = new HashSet<>();
         ContestEntity contest = new ContestEntity();
-        contest.setName("Contest1");
+        contest.setName("Första advent");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date contestDate = new Date(dateFormat.parse("2018-01-01").getTime());
         contest.setDate(contestDate);
@@ -45,7 +45,7 @@ public class DataLoader implements ApplicationRunner {
         Set<EventEntity> events = new HashSet<>();
         EventEntity event = new EventEntity();
         event.setContest(contest);
-        event.setName("Event1");
+        event.setName("En stor bil");
         event.setContestOrder(1);
         SimpleDateFormat timeFormat = new SimpleDateFormat("mm:ss");
         Time maxTime = new Time(timeFormat.parse("01:30").getTime());
@@ -54,7 +54,7 @@ public class DataLoader implements ApplicationRunner {
 
         EventEntity event2 = new EventEntity();
         event2.setContest(contest);
-        event2.setName("Event2");
+        event2.setName("Tre granar");
         event2.setContestOrder(2);
         Time maxTime2 = new Time(timeFormat.parse("02:30").getTime());
         event2.setMaxTime(maxTime2);
@@ -63,14 +63,14 @@ public class DataLoader implements ApplicationRunner {
         Set<StashEntity> stashes = new HashSet<>();
         StashEntity stash = new StashEntity();
         stash.setEvent(event);
-        stash.setName("Stash1");
+        stash.setName("Bakom elementet");
         stash.setPoints(25);
         stashes.add(stash);
 
         Set<StashEntity> stashes2 = new HashSet<>();
         StashEntity stash2 = new StashEntity();
         stash2.setEvent(event2);
-        stash2.setName("Stash2");
+        stash2.setName("Fönster");
         stash2.setPoints(25);
         stashes2.add(stash2);
 

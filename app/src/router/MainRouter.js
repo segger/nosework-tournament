@@ -8,7 +8,7 @@ const MainRouter = () => (
     <Switch>
         <Route exact path="/" component={ResultTournamentPage}/>
         <Route exact path="/results" component={ResultTournamentPage} />
-        <Route path="/results/:id" component={ResultPage}/>
+        <Route path="/results/:id" component={ResultPage} />
         <Route exact path="/tournaments" component={TournamentPage} />
     </Switch>
 )
